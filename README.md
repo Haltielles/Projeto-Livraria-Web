@@ -1,2 +1,1 @@
-# Projeto-Livraria-Web
-projeto final Web 
+Projeto Livraria Web
