@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BookcategoryComponent } from './bookcategory/bookcategory.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { BookcategoryService} from './Services/bookcategory.service';
-import { UsuarioService } from './Services/usuario.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,10 +15,7 @@ import { UsuarioService } from './Services/usuario.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [
-    BookcategoryService,
-    UsuarioService
-  ],
+  providers: [BookcategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
