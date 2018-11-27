@@ -25,7 +25,7 @@ const corsOptions = {//PARA RECEBER REQUISIÇOES APENAS DA APLICAÇÃO
 }
 const bodyParser = require('body-parser');//transforma JSON
 app.use(bodyParser.json());
-//app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 app.listen(8000, () => {//FICA AGUARDANDO REQUISIÇÕES
     console.log("servidor rodando");
@@ -33,7 +33,7 @@ app.listen(8000, () => {//FICA AGUARDANDO REQUISIÇÕES
     servUsuario.servicoUsuario("livraria/usuario", app, con, "usuarios");
     servCompra.servicoCompra("livraria/compra", app, con, "compras");
     servCarrinho.servicoCarrinho("livraria/carrinho", app, con, "carrinhos");
-    servBookDescription.servicoBookdescription("livraria/bookdescription", app, con, "carrinhos"); 
+    servBookDescription.servicoBookdescription("livraria/bookdescription", app, con, "bookdescriptions"); 
     servBookAuthor.servicoBookauthor("livraria/bookauthor", app, con, "bookauthors"); 
     servBookCategoryBook.servicoBookCategoryBook("livraria/bookcategorybook", app, con, "bookcategoriesbooks");
     servBookAuthorBook.servicoBookAuthorBook("livraria/bookauthorbook", app, con, "bookauthorsbooks");
