@@ -28,6 +28,6 @@ export class ListaComponent {
   }
 
   descricaoResumida(descricao: String): String {
-    return descricao.substr(0, 580);
+    return descricao.substr(0, 50);
   }
 }

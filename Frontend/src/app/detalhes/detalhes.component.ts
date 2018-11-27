@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListaItem } from '../lista/listaitem';
 import { Bookdescription } from '../Services/bookdescription';
 import { BookdescriptionService } from '../Services/bookdescription.service';
+import { BookauthorService } from  '../Services/bookauthor.service';
 
 @Component({
   selector: 'app-detalhes',
