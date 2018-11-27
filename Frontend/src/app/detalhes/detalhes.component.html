@@ -2,34 +2,26 @@
   <div class="col s4 m4 l4 center">
     <div class="card">
       <div class="card-image">
-        <img src="assets/bookimages/0321350316.01.LZZZZZZZ.jpg" height=600 width=400>
+        <img src="assets/bookimages/{{item.isbn}}.01.LZZZZZZZ.jpg" height=600 width=400>
       </div>
     </div>
   </div>
   <div class="col s8 m8 l8 right">
     <div>
       <div class="card-panel white">
-        <h4>Prioritizing Web Usability</h4>
-        <h6>by <a href="#">Autores</a></h6>
+        <h4>{{item.title}}</h4>
+        <h6>by <div *ngFor="let autor of item.autors"><a href="authors?{{autor}}">{{autor}}</a></div></h6>
       </div>
       <div class="card-panel white">
-        List Price: <div class="preco-tachado">$50.00</div><br>
-        Our Price: <div class="preco">$40.00</div><br>
-        You Save: <div class="preco">$10.00 (20%)</div><br>
-        <b>ISBN:</b> 0321350316<br>
-        <b>Publisher:</b> New Riders Press<br>
-        <b>Pages:</b> 432<br>
-        <b>Edition:</b> 1<br>
+        List Price: <div class="preco-tachado">${{item.price}}</div><br>
+        Our Price: <div class="preco">${{precoPromocional(item.price)}}</div><br>
+        You Save: <div class="preco">${{desconto(item.price)}}</div><br>
+        <b>ISBN:</b> {{item.isbn}}<br>
+        <b>Publisher:</b> {{item.publisher}}<br>
+        <b>Pages:</b> {{item.pages}}<br>
+        <b>Edition:</b> {{item.edition}}<br>
         <div class="card-content">
-          <p>In 2000, Jakob Nielsen, the world's leading expert on Web usability, published a book that changed how people
-            think about the Web - Designing Web Usability (New Riders). Many applauded. A few jeered. But everyone listened.
-            The best-selling usability guru is back and has revisited his classic guide, joined forces with Web usability
-            consultant Hoa Loranger, and created an updated companion book that covers the essential changes to the Weband
-            usability today. Prioritizing Web Usability is the guide for anyone who wants to take their Web site(s) to next
-            level and make usability a priority! Through the authors' wisdom, experience, and hundreds of real-world user
-            tests and contemporary Web site critiques, you'll learn about site design, user experience and usability testing,
-            navigation and search capabilities, old guidelines and prioritizing usability issues, page design and layout,
-            content design, and more!</p>
+            {{item.description}}
         </div>
       </div>
       <div class="card-action">
