@@ -1,39 +1,15 @@
-<div class="col l12 m12 s12">
+<div class="col l12 m12 s12" *ngFor="let lista of itens">
   <div class="card horizontal">
     <div class="card-image">
-      <img src="assets/bookimages/0321350316.01.MZZZZZZZ.jpg" height=200>
+      <img src="assets/bookimages/{{lista.isbn}}.01.MZZZZZZZ.jpg" height=200>
     </div>
     <div class="card-stacked">
       <div class="card-content">
-        <span class="card-title">Prioritizing Web Usability</span>
-        <blockquote>In 2000, Jakob Nielsen, the world's leading expert on Web usability, published a book that changed
-          how people think about the Web - Designing Web Usability (New Riders). Many applauded. A few jeered. But
-          everyonee think about the Web - Designing Web Usability (New Riders). Many applauded. A few jeered. But
-          everyone
-          listened. <a href="detalhes?isbn=0321350316"><b>mais detalhes...</b></a></blockquote>
-      </div>
-      <div class="card-action">
-        <a href="#">Adicionar ao Carrinho</a>
+        <span class="card-title"><a href="detalhes?isbn={{lista.isbn}}">{{lista.title}}</a></span>
+        <b>Authors</b><div *ngFor="let autor of lista.autors"><a href="authors?{{autor}}">{{autor}}</a></div>
+        {{descricaoResumida(lista.description)}}...
+        <a href="detalhes?isbn={{lista.isbn}}"><b>mais detalhes</b></a>
       </div>
     </div>
   </div>
 </div>
-<!-- TEMPLATE DO CONTEUDO LIVROS
-<div class="col l12 m12 s12">
-  <div class="card horizontal">
-    <div class="card-image">
-      <img src="assets/bookimages/A R Q U I V O  D E  I M A G E M" height=200>
-    </div>
-    <div class="card-stacked">
-      <div class="card-content">
-        <span class="card-title">T I T U L O  D O  L I V R O</span>
-        <blockquote>T E X T O  I N I C I A L  D O  L I V R O<a href="L I N K  P A R A  O  L I V R O  C O M P L E T O"><b>mais
-              detalhes...</b></a></blockquote>
-      </div>
-      <div class="card-action">
-        <a href="#">A D I C I O N A R   A O  C A R R I N H O</a>
-      </div>
-    </div>
-  </div>
-</div>
--->

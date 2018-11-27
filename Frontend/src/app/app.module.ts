@@ -26,7 +26,7 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
     CarrinhoComponent,
     ListaComponent,
     LoginComponent,
-    DetalhesComponent
+    DetalhesComponent,
   ],
   imports: [
     BrowserModule,

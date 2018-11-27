@@ -1,6 +1,6 @@
 export class MenuItem {
-    constructor(
+  constructor(
     public id: number,
     public assunto: string,
-    public tagsql: string) {}
-  }
+    public tagsql: string) { }
+}
