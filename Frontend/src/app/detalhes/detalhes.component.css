@@ -1,0 +1,12 @@
+.preco {
+    color: red;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.preco-tachado {
+    color: red;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: line-through;
+}
