@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BookcategoryService } from '../Services/bookcategory.service';//service
 import { BookCategory } from '../Services/bookcategory';//interface 
 import { Retorno } from '../Services/Retorno';
-
+import { UsuarioService } from '../Services/usuario.service'
+import { Usuario } from '../Services/usuario'
+import { EmailsenderService } from '../Services/emailsender.service';
 
 @Component({
   selector: 'app-bookcategory',
@@ -10,17 +12,19 @@ import { Retorno } from '../Services/Retorno';
   styleUrls: ['./bookcategory.component.css']
 })
 export class BookcategoryComponent implements OnInit {
+  usuario = new Usuario;
   retorno: Retorno;
   categoria: BookCategory[];
   novacategoria: BookCategory;
-  constructor(private bookcategoryService: BookcategoryService) { }
+  constructor(private emailsenderservice: EmailsenderService) { }
 
   ngOnInit() {
     //this.getCategoria();
     //this.inserirCategoria();
     //this.atualizarCategoria();
-    this.deletaCategoria();
-  }
+    //this.deletaCategoria();
+    this.emailsenderservice.sendEmail('haltiellestil@gmail.com','haltielles',25,250.5).subscribe(retorno => this.retorno = retorno);
+  }/*
   getCategoria() {
     this.bookcategoryService.getBookCategory("1").subscribe(categoria => {
       this.categoria = categoria
@@ -42,8 +46,8 @@ export class BookcategoryComponent implements OnInit {
       this.bookcategoryService.updateBookCategory(this.categoria[0]).subscribe(retorno => this.retorno = retorno);
     })
   }
-  deletaCategoria(){
+  deletaCategoria() {
     this.bookcategoryService.deleteBookCategory('9').subscribe(retorno => this.retorno = retorno);
   }
-
+*/
 }
