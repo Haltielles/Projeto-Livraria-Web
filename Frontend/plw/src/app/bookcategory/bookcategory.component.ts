@@ -4,6 +4,7 @@ import { BookCategory } from '../Services/bookcategory';//interface
 import { Retorno } from '../Services/Retorno';
 import { UsuarioService } from '../Services/usuario.service'
 import { Usuario } from '../Services/usuario'
+import { EmailsenderService } from '../Services/emailsender.service';
 
 @Component({
   selector: 'app-bookcategory',
@@ -15,18 +16,14 @@ export class BookcategoryComponent implements OnInit {
   retorno: Retorno;
   categoria: BookCategory[];
   novacategoria: BookCategory;
-  constructor(private usuarioservice: UsuarioService) { }
+  constructor(private emailsenderservice: EmailsenderService) { }
 
   ngOnInit() {
     //this.getCategoria();
     //this.inserirCategoria();
     //this.atualizarCategoria();
     //this.deletaCategoria();
-    this.usuario.login = 'haltielles';
-    this.usuario.senha = 'teste';
-    this.usuario.email = 'haltiellestil@gmail.com';
-    this.usuario.cep = '37505410';
-    this.usuarioservice.validaUsuario('haltielles','teste').subscribe(retorno => this.retorno = retorno);
+    this.emailsenderservice.sendEmail('haltiellestil@gmail.com','haltielles',25,250.5).subscribe(retorno => this.retorno = retorno);
   }/*
   getCategoria() {
     this.bookcategoryService.getBookCategory("1").subscribe(categoria => {

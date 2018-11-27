@@ -6,6 +6,8 @@ const servBookCategoryBook = require('./bookcategoriebook')
 const servUsuario = require('./usuario');
 const servCompra = require('./compra');
 const servCarrinho = require('./carrinho');
+const servEmailSender = require('./emailsender')
+const nodemailer = require('nodemailer');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -23,7 +25,7 @@ const corsOptions = {//PARA RECEBER REQUISIÇOES APENAS DA APLICAÇÃO
 }
 const bodyParser = require('body-parser');//transforma JSON
 app.use(bodyParser.json());
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 
 app.listen(8000, () => {//FICA AGUARDANDO REQUISIÇÕES
     console.log("servidor rodando");
@@ -35,6 +37,7 @@ app.listen(8000, () => {//FICA AGUARDANDO REQUISIÇÕES
     servBookAuthor.servicoBookauthor("livraria/bookauthor", app, con, "bookauthors"); 
     servBookCategoryBook.servicoBookCategoryBook("livraria/bookcategorybook", app, con, "bookcategoriesbooks");
     servBookAuthorBook.servicoBookAuthorBook("livraria/bookauthorbook", app, con, "bookauthorsbooks");
+    servEmailSender.emailSender(app,nodemailer);
 });
 
 
