@@ -1,6 +1,6 @@
 exports.servicoBookCategory = function servicoBookCategory(service, app, con, tabela) {
   //buscar dados bookcategory por id
-  app.route('/api/' + service + '/getcategory/:id').get((req, res) => {
+  app.route('/api/' + service + '/get/:id').get((req, res) => {
     var query = "SELECT * FROM " + tabela + " WHERE CategoryID = " + req.params.id;
     console.log(query);
     //-------------------base de dados-----------------
