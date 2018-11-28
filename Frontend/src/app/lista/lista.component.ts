@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ListaItem } from './listaitem';
 import { Bookdescription } from '../Services/bookdescription';
 import { BookdescriptionService } from '../Services/bookdescription.service';
-import { getRandomString } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-lista',
@@ -23,7 +22,8 @@ export class ListaComponent {
     this.servBookDesk.getBooksDescriptions().subscribe(itens => {
       this.itensBase = itens;
       for (let entry of itens) {
-        this.itens.push(new ListaItem(entry.ISBN, entry.title, [], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
+        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
+        // SELECT `bookdescriptions`.`ISBN`, `title`, `bookauthors`.`nameF`, `bookauthors`.`nameL`, `description`, `price`, `publisher`, `pubdate`, `edition`, `pages` FROM `bookdescriptions` INNER JOIN bookauthorsbooks ON bookdescriptions.ISBN = bookauthorsbooks.ISBN INNER JOIN bookauthors ON bookauthorsbooks.AuthorID = bookauthors.AuthorID
       }
       this.listaAleatoria();
     });

@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ListaItem } from '../lista/listaitem';
 import { Bookdescription } from '../Services/bookdescription';
-import { BookdescriptionService } from '../Services/bookdescription.service';
-import { BookauthorService } from  '../Services/bookauthor.service';
+import { EspecialqueryService } from '../Services/especialquery.service';
 
 @Component({
   selector: 'app-detalhes',
@@ -14,18 +13,19 @@ export class DetalhesComponent {
   itensBase: Bookdescription[];
   itens = new Array<ListaItem>();
 
-  constructor(private servBookDesk: BookdescriptionService) {
+  constructor(private especialQuery: EspecialqueryService) {
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.servBookDesk.getBooksDescriptions().subscribe(itens => {
+    this.especialQuery.bookDescribe('0131428985').subscribe(itens => {
       this.itensBase = itens;
       console.log(this.itensBase);
+      // tslint:disable-next-line:prefer-const
       for (let entry of itens) {
-        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
+        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
       }
     });
-
   }
 
   precoPromocional(preco: number): string {
@@ -33,6 +33,7 @@ export class DetalhesComponent {
   }
 
   desconto(preco: number): string {
+    // tslint:disable-next-line:prefer-const
     let desconto = 0.9;
     return (preco - (preco * desconto)).toFixed(2) + ' - Save: ' + ((1 - desconto) * 100).toFixed(2) + '%';
   }

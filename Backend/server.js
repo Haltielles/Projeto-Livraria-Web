@@ -1,3 +1,4 @@
+const servEspecialQuery = require('./especialquery');
 const servBookCategory = require('./bookcategory');
 const servBookDescription = require('./bookdescription');
 const servBookAuthor = require('./bookauthor');
@@ -38,6 +39,7 @@ app.listen(8000, () => {//FICA AGUARDANDO REQUISIÇÕES
     servBookCategoryBook.servicoBookCategoryBook("livraria/bookcategorybook", app, con, "bookcategoriesbooks");
     servBookAuthorBook.servicoBookAuthorBook("livraria/bookauthorbook", app, con, "bookauthorsbooks");
     servEmailSender.emailSender(app,nodemailer);
+    servEspecialQuery.especialQuery(app,con);
 });
 
 
