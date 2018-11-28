@@ -27,7 +27,7 @@ exports.especialQuery = function especialQuery(app, con) {
                         console.log(aux + '"authors":' + JSON.stringify(result) + "}");
                         resquery[control] = JSON.parse(aux + '"authors":' + JSON.stringify(result) + "}");
                         if (control == resquery.length - 1) {
-                            res.send(resquery[0]);
+                            res.send(resquery);
                         }
                         control++;
                     });

@@ -9,45 +9,38 @@ import { Livro } from '../Services/especialquery';
 })
 
 export class ListaComponent {
-  itens = new Array<Livro>();
+  itensAll = new Array<Livro>();
   itensTelaInicial = new Array<Livro>();
 
   constructor(private especialQuery: EspecialqueryService) {
   }
   ngOnInit() {
-    //this.especialQuery.bookDescribe("ISBN != ''").subscribe(itens => {
-    //  this.itens = itens;
-    //});
+    this.especialQuery.allBooks().subscribe(itens => {
+      this.itensAll = itens;
+    });
 
-    //this.listaAleatoria();
+    this.listaAleatoria();
   }
 
-
-
-
-  /*    this.servBookDesk.getBooksDescriptions().subscribe(itens => {
-        this.itensBase = itens;
-        for (let entry of itens) {
-          this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
-        }
-  */
-
   listaAleatoria() {
-    let aleatorio1 = Math.floor(Math.random() * this.itens.length);
-    this.itensTelaInicial.push(this.itens[aleatorio1]);
-    this.itens.splice(aleatorio1, 1);
+    let aleatorio1 = Math.floor(Math.random() * this.itensAll.length);
+    this.itensTelaInicial.push(this.itensAll[aleatorio1]);
+    this.itensAll.splice(aleatorio1, 1);
+    console.log('itens: ' + this.itensAll[0].description);
 
-    let aleatorio2 = Math.floor(Math.random() * this.itens.length);
+    /*let aleatorio2 = Math.floor(Math.random() * this.itens.length);
     this.itensTelaInicial.push(this.itens[aleatorio2]);
     this.itens.splice(aleatorio2, 1);
+    console.log(aleatorio2);
 
     let aleatorio3 = Math.floor(Math.random() * this.itens.length);
     this.itensTelaInicial.push(this.itens[aleatorio3]);
     this.itens.splice(aleatorio3, 1);
+    console.log(aleatorio3);
 
     this.itens.push(this.itensTelaInicial[0]);
     this.itens.push(this.itensTelaInicial[1]);
-    this.itens.push(this.itensTelaInicial[2]);
+    this.itens.push(this.itensTelaInicial[2]);*/
   }
 
   descricaoResumida(descricao: String): String {

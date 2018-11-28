@@ -22,13 +22,13 @@ export class CarrinhoComponent implements OnInit {
     this.servBookDesk.getBooksDescriptions().subscribe(itens => {
       this.itensBase = itens;
       for (let entry of itens) {
-        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
+//        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
       }
     });
   }
 
   insereItem(item: ListaItem) {
-    this.itensCar.push(new ItensCarrinho(item.isbn, item.title, item.price, 1));
+//    this.itensCar.push(new ItensCarrinho(item.isbn, item.title, item.price, 1));
   }
 
   retiraItem(ISBN: number) {

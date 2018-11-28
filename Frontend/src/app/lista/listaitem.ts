@@ -4,9 +4,9 @@ export class ListaItem {
         public title: string,
         public autors: Array<string>,
         public description: string,
-        public price: number,
+        public price: string,
         public publisher: string,
         public pubdate: string,
         public edition: string,
-        public pages: number) { }
+        public pages: string) { }
 }
