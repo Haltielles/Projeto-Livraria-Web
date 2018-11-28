@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaItem } from './listaitem';
-import { Bookdescription } from '../Services/bookdescription';
-import { BookdescriptionService } from '../Services/bookdescription.service';
+import { EspecialqueryService } from '../Services/especialquery.service';
+import { Livro } from '../Services/especialquery';
 
 @Component({
   selector: 'app-lista',
@@ -10,25 +9,28 @@ import { BookdescriptionService } from '../Services/bookdescription.service';
 })
 
 export class ListaComponent {
-  public a: Bookdescription;
-  itensBase: Bookdescription[];
-  itens = new Array<ListaItem>();
-  itensTelaInicial = new Array<ListaItem>();
+  itens = new Array<Livro>();
+  itensTelaInicial = new Array<Livro>();
 
-  constructor(private servBookDesk: BookdescriptionService) {
+  constructor(private especialQuery: EspecialqueryService) {
   }
-
   ngOnInit() {
-    this.servBookDesk.getBooksDescriptions().subscribe(itens => {
-      this.itensBase = itens;
-      for (let entry of itens) {
-        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
-        // SELECT `bookdescriptions`.`ISBN`, `title`, `bookauthors`.`nameF`, `bookauthors`.`nameL`, `description`, `price`, `publisher`, `pubdate`, `edition`, `pages` FROM `bookdescriptions` INNER JOIN bookauthorsbooks ON bookdescriptions.ISBN = bookauthorsbooks.ISBN INNER JOIN bookauthors ON bookauthorsbooks.AuthorID = bookauthors.AuthorID
-      }
-      this.listaAleatoria();
-    });
+    //this.especialQuery.bookDescribe("ISBN != ''").subscribe(itens => {
+    //  this.itens = itens;
+    //});
 
+    //this.listaAleatoria();
   }
+
+
+
+
+  /*    this.servBookDesk.getBooksDescriptions().subscribe(itens => {
+        this.itensBase = itens;
+        for (let entry of itens) {
+          this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
+        }
+  */
 
   listaAleatoria() {
     let aleatorio1 = Math.floor(Math.random() * this.itens.length);
@@ -52,3 +54,4 @@ export class ListaComponent {
     return descricao.substr(0, 550);
   }
 }
+

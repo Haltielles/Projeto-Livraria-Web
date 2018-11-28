@@ -1,10 +1,9 @@
-export interface BookCategory{
+export interface BookCategory {
     CategoryID: number;
     CategoryName: string;
 }
-export class BookCategory implements BookCategory{
-    constructor(){
-        
+export class BookCategory implements BookCategory {
+    constructor() {
     }
-}    
+}
 

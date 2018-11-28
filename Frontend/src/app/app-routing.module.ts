@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ListaComponent } from './lista/lista.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
+import { isBoolean } from 'util';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
     component: CarrinhoComponent
   },
   {
-    path: 'detalhes',
+    path: 'detalhes/:isbn',
     component: DetalhesComponent
   }
 ];

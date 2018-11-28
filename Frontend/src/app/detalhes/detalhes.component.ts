@@ -1,7 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { ListaItem } from '../lista/listaitem';
 import { Bookdescription } from '../Services/bookdescription';
 import { EspecialqueryService } from '../Services/especialquery.service';
+import { Livro } from '../Services/especialquery';
 
 @Component({
   selector: 'app-detalhes',
@@ -9,22 +10,18 @@ import { EspecialqueryService } from '../Services/especialquery.service';
   styleUrls: ['./detalhes.component.css']
 })
 export class DetalhesComponent {
+  isbnRepassado: string;
   public a: Bookdescription;
   itensBase: Bookdescription[];
-  itens = new Array<ListaItem>();
+  item = new Array<Livro>();
 
-  constructor(private especialQuery: EspecialqueryService) {
+  constructor(private route: ActivatedRoute, private especialQuery: EspecialqueryService) {
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.especialQuery.bookDescribe('0131428985').subscribe(itens => {
-      this.itensBase = itens;
-      console.log(this.itensBase);
-      // tslint:disable-next-line:prefer-const
-      for (let entry of itens) {
-        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
-      }
+    this.isbnRepassado = this.route.snapshot.paramMap.get('isbn');
+    this.especialQuery.bookDescribe(this.isbnRepassado).subscribe(itens => {
+      this.item = itens;
     });
   }
 
@@ -33,7 +30,6 @@ export class DetalhesComponent {
   }
 
   desconto(preco: number): string {
-    // tslint:disable-next-line:prefer-const
     let desconto = 0.9;
     return (preco - (preco * desconto)).toFixed(2) + ' - Save: ' + ((1 - desconto) * 100).toFixed(2) + '%';
   }

@@ -5,10 +5,10 @@
     </div>
     <div class="card-stacked">
       <div class="card-content">
-        <span class="card-title"><a href="detalhes?isbn={{lista.isbn}}">{{lista.title}}</a></span>
+        <span class="card-title"><a href="detalhes/{{lista.isbn}}">{{lista.title}}</a></span>
         <b>Authors</b><div *ngFor="let autor of lista.autors"><a href="authors?{{autor}}">{{autor}}</a></div>
         {{descricaoResumida(lista.description)}}...
-        <a href="detalhes?isbn={{lista.isbn}}"><b>mais detalhes</b></a>
+        <a href="detalhes/{{lista.isbn}}"><b>mais detalhes</b></a>
       </div>
     </div>
   </div>

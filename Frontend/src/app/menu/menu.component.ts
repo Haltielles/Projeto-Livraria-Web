@@ -1,5 +1,33 @@
+/*
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from './MenuItem';
+import { EspecialqueryService } from '../Services/especialquery.service';
+import { Livro } from '../Services/especialquery';
+
+@Component({
+  selector: 'app-lista',
+  templateUrl: './lista.component.html',
+  styleUrls: ['./lista.component.css']
+})
+
+export class ListaComponent {
+  itens = new Array<Livro>();
+  itensTelaInicial = new Array<Livro>();
+
+  constructor(private especialQuery: EspecialqueryService) {
+  }
+  ngOnInit() {
+    //this.especialQuery.bookDescribe("ISBN != ''").subscribe(itens => {
+    //  this.itens = itens;
+    //});
+
+    //this.listaAleatoria();
+  }
+*/
+
+
+import { Component, OnInit } from '@angular/core';
+import { BookcategoryService } from '../Services/bookcategory.service';
+import { BookCategory } from '../Services/bookcategory';
 
 @Component({
   selector: 'app-menu',
@@ -8,17 +36,14 @@ import { MenuItem } from './MenuItem';
 })
 
 export class MenuComponent {
-  titulo = 'Assunto';
-  itens = [
-    new MenuItem(1, 'Php', 'php'),
-    new MenuItem(2, 'Javascript', 'javascript'),
-    new MenuItem(3, 'Typescript', 'typescript'),
-    new MenuItem(4, 'SQL', 'sql'),
-    new MenuItem(5, 'JSON', 'json'),
-    new MenuItem(6, 'Ajax', 'ajax'),
-    new MenuItem(7, 'ASP.Net', 'aspnet'),
-    new MenuItem(8, 'Angular', 'angular'),
-    new MenuItem(9, 'Node.JS', 'nodejs')
-  ];
-  default = this.itens[0];
+  itens = new Array<BookCategory>();
+
+  constructor(private bookCategory: BookcategoryService) {
+  }
+
+  ngOnInit() {
+    this.bookCategory.getBookCategory().subscribe(itens => {
+      this.itens = itens;
+    });
+  }
 }

@@ -10,6 +10,9 @@ export class EspecialqueryService {
 
   constructor(private http: HttpClient) { }
 
+  allBooks(): Observable<Livro[]> {
+    return this.http.get<Livro[]>('http://localhost:8000/api/livraria/allbooks/');
+  }
   bookDescribe(isbn: string): Observable<Livro[]> {
     return this.http.get<Livro[]>('http://localhost:8000/api/livraria/bookdescribe/' + isbn);
   }

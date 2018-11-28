@@ -1,8 +1,10 @@
 <div class="card-panel white">
-<h5>Categorias</h5>
-<ul>
-  <li *ngFor="let MenuItem of itens">
-    <a href="{{ MenuItem.assunto }}">{{ MenuItem.assunto }}</a>
-  </li>
-</ul>
+  <div style="text-align: center">
+    <h5>Categorias</h5>
+  </div>
+  <ul>
+    <li *ngFor="let MenuItem of itens">
+      <a href="{{ MenuItem.nome }}">{{ MenuItem.nome }}</a>
+    </li>
+  </ul>
 </div>

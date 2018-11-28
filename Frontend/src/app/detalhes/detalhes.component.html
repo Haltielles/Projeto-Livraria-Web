@@ -2,7 +2,7 @@
   <div class="col s4 m4 l4 center">
     <div class="card">
       <div class="card-image">
-        <img src="assets/bookimages/{{item.isbn}}.01.LZZZZZZZ.jpg" height=600 width=400>
+        <img src="assets/bookimages/{{item.ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
       </div>
     </div>
   </div>
@@ -10,13 +10,13 @@
     <div>
       <div class="card-panel white">
         <h4>{{item.title}}</h4>
-        <h6>by <div *ngFor="let autor of item.autors"><a href="authors?{{autor}}">{{autor}}</a></div></h6>
+        <h6>by <div *ngFor="let autores of item.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
         List Price: <div class="preco-tachado">${{item.price}}</div><br>
         Our Price: <div class="preco">${{precoPromocional(item.price)}}</div><br>
         You Save: <div class="preco">${{desconto(item.price)}}</div><br>
-        <b>ISBN:</b> {{item.isbn}}<br>
+        <b>ISBN:</b> {{item.ISBN}}<br>
         <b>Publisher:</b> {{item.publisher}}<br>
         <b>Pages:</b> {{item.pages}}<br>
         <b>Edition:</b> {{item.edition}}<br>
