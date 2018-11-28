@@ -2,26 +2,26 @@
   <div class="col s4 m4 l4 center">
     <div class="card">
       <div class="card-image">
-        <img src="assets/bookimages/{{item.ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
+        <img src="assets/bookimages/{{item[0].ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
       </div>
     </div>
   </div>
   <div class="col s8 m8 l8 right">
     <div>
       <div class="card-panel white">
-        <h4>{{item.title}}</h4>
-        <h6>by <div *ngFor="let autores of item.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
+        <h4>{{item[0].title}}</h4>
+        <h6>by <div *ngFor="let autores of item[0].authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
-        List Price: <div class="preco-tachado">${{item.price}}</div><br>
-        Our Price: <div class="preco">${{precoPromocional(item.price)}}</div><br>
-        You Save: <div class="preco">${{desconto(item.price)}}</div><br>
-        <b>ISBN:</b> {{item.ISBN}}<br>
-        <b>Publisher:</b> {{item.publisher}}<br>
-        <b>Pages:</b> {{item.pages}}<br>
-        <b>Edition:</b> {{item.edition}}<br>
+        List Price: <div class="preco-tachado">${{item[0].price}}</div><br>
+        Our Price: <div class="preco">${{precoPromocional(item[0].price)}}</div><br>
+        You Save: <div class="preco">${{desconto(item[0].price)}}</div><br>
+        <b>ISBN:</b> {{item[0].ISBN}}<br>
+        <b>Publisher:</b> {{item[0].publisher}}<br>
+        <b>Pages:</b> {{item[0].pages}}<br>
+        <b>Edition:</b> {{item[0].edition}}<br>
         <div class="card-content">
-            {{item.description}}
+            {{item[0].description}}
         </div>
       </div>
       <div class="card-action">

@@ -17,9 +17,8 @@ export class ListaComponent {
   ngOnInit() {
     this.especialQuery.allBooks().subscribe(itens => {
       this.itensAll = itens;
+      this.listaAleatoria();
     });
-
-    this.listaAleatoria();
   }
 
   listaAleatoria() {
@@ -28,19 +27,19 @@ export class ListaComponent {
     this.itensAll.splice(aleatorio1, 1);
     console.log('itens: ' + this.itensAll[0].description);
 
-    /*let aleatorio2 = Math.floor(Math.random() * this.itens.length);
-    this.itensTelaInicial.push(this.itens[aleatorio2]);
-    this.itens.splice(aleatorio2, 1);
+    let aleatorio2 = Math.floor(Math.random() * this.itensAll.length);
+    this.itensTelaInicial.push(this.itensAll[aleatorio2]);
+    this.itensAll.splice(aleatorio2, 1);
     console.log(aleatorio2);
 
-    let aleatorio3 = Math.floor(Math.random() * this.itens.length);
-    this.itensTelaInicial.push(this.itens[aleatorio3]);
-    this.itens.splice(aleatorio3, 1);
+    let aleatorio3 = Math.floor(Math.random() * this.itensAll.length);
+    this.itensTelaInicial.push(this.itensAll[aleatorio3]);
+    this.itensAll.splice(aleatorio3, 1);
     console.log(aleatorio3);
 
-    this.itens.push(this.itensTelaInicial[0]);
-    this.itens.push(this.itensTelaInicial[1]);
-    this.itens.push(this.itensTelaInicial[2]);*/
+    this.itensAll.push(this.itensTelaInicial[0]);
+    this.itensAll.push(this.itensTelaInicial[1]);
+    this.itensAll.push(this.itensTelaInicial[2]);
   }
 
   descricaoResumida(descricao: String): String {
