@@ -1,6 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { Bookdescription } from '../Services/bookdescription';
 import { EspecialqueryService } from '../Services/especialquery.service';
 import { Livro } from '../Services/especialquery';
 
@@ -11,9 +10,7 @@ import { Livro } from '../Services/especialquery';
 })
 export class DetalhesComponent {
   isbnRepassado: string;
-  public a: Bookdescription;
-  itensBase: Bookdescription[];
-  item = new Array<Livro>();
+  itemDetalhe = new Array<Livro>();
 
   constructor(private route: ActivatedRoute, private especialQuery: EspecialqueryService) {
   }
@@ -21,7 +18,8 @@ export class DetalhesComponent {
   ngOnInit() {
     this.isbnRepassado = this.route.snapshot.paramMap.get('isbn');
     this.especialQuery.bookDescribe(this.isbnRepassado).subscribe(itens => {
-      this.item = itens;
+      this.itemDetalhe = itens;
+      console.log(this.itemDetalhe);
     });
   }
 

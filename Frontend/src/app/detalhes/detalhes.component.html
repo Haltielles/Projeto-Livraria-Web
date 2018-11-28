@@ -2,26 +2,27 @@
   <div class="col s4 m4 l4 center">
     <div class="card">
       <div class="card-image">
-        <img src="assets/bookimages/{{item[0].ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
+        <img src="assets/bookimages/{{itemDetalhe.ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
+        {{itemDetalhe[0].title}}
       </div>
     </div>
   </div>
   <div class="col s8 m8 l8 right">
     <div>
       <div class="card-panel white">
-        <h4>{{item[0].title}}</h4>
-        <h6>by <div *ngFor="let autores of item[0].authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
+        <h4>{{itemDetalhe[0].title}}</h4>
+        <h6>by <div *ngFor="let autores of itemDetalhe.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
-        List Price: <div class="preco-tachado">${{item[0].price}}</div><br>
-        Our Price: <div class="preco">${{precoPromocional(item[0].price)}}</div><br>
-        You Save: <div class="preco">${{desconto(item[0].price)}}</div><br>
-        <b>ISBN:</b> {{item[0].ISBN}}<br>
-        <b>Publisher:</b> {{item[0].publisher}}<br>
-        <b>Pages:</b> {{item[0].pages}}<br>
-        <b>Edition:</b> {{item[0].edition}}<br>
+        List Price: <div class="preco-tachado">${{itens.price}}</div><br>
+        Our Price: <div class="preco">${{precoPromocional(itemDetalhe.price)}}</div><br>
+        You Save: <div class="preco">${{desconto(itemDetalhe.price)}}</div><br>
+        <b>ISBN:</b> {{itemDetalhe.ISBN}}<br>
+        <b>Publisher:</b> {{itemDetalhe.publisher}}<br>
+        <b>Pages:</b> {{itemDetalhe.pages}}<br>
+        <b>Edition:</b> {{itemDetalhe.edition}}<br>
         <div class="card-content">
-            {{item[0].description}}
+            {{itemDetalhe.description}}
         </div>
       </div>
       <div class="card-action">

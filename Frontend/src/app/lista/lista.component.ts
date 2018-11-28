@@ -25,17 +25,14 @@ export class ListaComponent {
     let aleatorio1 = Math.floor(Math.random() * this.itensAll.length);
     this.itensTelaInicial.push(this.itensAll[aleatorio1]);
     this.itensAll.splice(aleatorio1, 1);
-    console.log('itens: ' + this.itensAll[0].description);
 
     let aleatorio2 = Math.floor(Math.random() * this.itensAll.length);
     this.itensTelaInicial.push(this.itensAll[aleatorio2]);
     this.itensAll.splice(aleatorio2, 1);
-    console.log(aleatorio2);
 
     let aleatorio3 = Math.floor(Math.random() * this.itensAll.length);
     this.itensTelaInicial.push(this.itensAll[aleatorio3]);
     this.itensAll.splice(aleatorio3, 1);
-    console.log(aleatorio3);
 
     this.itensAll.push(this.itensTelaInicial[0]);
     this.itensAll.push(this.itensTelaInicial[1]);

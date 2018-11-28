@@ -1,5 +1,5 @@
 exports.especialQuery = function especialQuery(app, con) {
-//buscar todos os livros 
+    //buscar todos os livros 
     app.route('/api/livraria/allbooks').get((req, res) => {
         //pega todos os livros por categoria
         query = "SELECT * FROM `bookdescriptions`";
@@ -36,11 +36,10 @@ exports.especialQuery = function especialQuery(app, con) {
         });
         con.end;
         //--------------------------------------------------
-    });  
-  
+    });
     //buscar dados livro por isbn
     app.route('/api/livraria/bookdescribe/:isbn').get((req, res) => {
-	var query = "SELECT * FROM bookdescriptions WHERE ISBN = '" + req.params.isbn + "'";
+        var query = "SELECT * FROM bookdescriptions WHERE ISBN = '" + req.params.isbn + "'";
         var resquery;
         console.log(query);
         //-------------------base de dados-----------------
@@ -49,10 +48,9 @@ exports.especialQuery = function especialQuery(app, con) {
             con.query(query, function (err, result, fields) {
                 if (err) throw err;
                 resquery = JSON.stringify(result);
-                console.log(result);
                 resquery = resquery.substr(1, resquery.length - 3) + ",";
             });
-	    query = "SELECT b.AuthorID,b.nameF,b.nameL FROM bookauthorsbooks AS a LEFT OUTER JOIN bookauthors AS b ON (a.AuthorID=b.AuthorID) WHERE a.ISBN = '" + req.params.isbn + "'";
+            query = "SELECT b.AuthorID,b.nameF,b.nameL FROM bookauthorsbooks AS a LEFT OUTER JOIN bookauthors AS b ON (a.AuthorID=b.AuthorID) WHERE a.ISBN = '" + req.params.isbn + "'";
             console.log(query);
             con.query(query, function (err, result, fields) {
                 if (err) throw err;
@@ -67,8 +65,7 @@ exports.especialQuery = function especialQuery(app, con) {
     //buscar livros por categoria por id
     app.route('/api/livraria/bookcategorie/:id').get((req, res) => {
         //pega todos os livros por categoria
-	query = "SELECT a.AuthorID, a.nameF, a.nameL FROM bookauthors AS a LEFT OUTER JOIN bookauthorsbooks AS b on ( a.AuthorID = b.AuthorID ) WHERE b.ISBN = '" + resquery[i].ISBN + "'";
-        //query = "SELECT b.ISBN,b.title,b.description,b.price,b.publisher,b.pubdate,b.edition,b.pages FROM bookcategoriesbooks AS a LEFT OUTER JOIN bookdescriptions AS b on ( a.ISBN = b.ISBN ) WHERE a.CategoryID = " + req.params.id;
+        query = "SELECT b.ISBN,b.title,b.description,b.price,b.publisher,b.pubdate,b.edition,b.pages FROM bookcategoriesbooks AS a LEFT OUTER JOIN bookdescriptions AS b on ( a.ISBN = b.ISBN ) WHERE a.CategoryID = " + req.params.id;
         console.log(query);
         var resquery = new Array();
         con.connect(function (err) {
