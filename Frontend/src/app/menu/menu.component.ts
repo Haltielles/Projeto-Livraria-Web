@@ -36,14 +36,15 @@ import { BookCategory } from '../Services/bookcategory';
 })
 
 export class MenuComponent {
-  itens = new Array<BookCategory>();
+  itensCategory = new Array<BookCategory>();
 
   constructor(private bookCategory: BookcategoryService) {
   }
 
   ngOnInit() {
-    //this.bookCategory.getBookCategory().subscribe(itens => {
-    //  this.itens = itens;
-    //});
+    this.bookCategory.getAllBookCategory().subscribe(itens => {
+      this.itensCategory = itens;
+      console.log(this.itensCategory);
+    });
   }
 }

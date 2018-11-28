@@ -3,18 +3,17 @@
     <div class="card">
       <div class="card-image">
         <img src="assets/bookimages/{{itemDetalhe.ISBN}}.01.LZZZZZZZ.jpg" height=600 width=400>
-        {{itemDetalhe[0].title}}
       </div>
     </div>
   </div>
   <div class="col s8 m8 l8 right">
     <div>
       <div class="card-panel white">
-        <h4>{{itemDetalhe[0].title}}</h4>
+        <h4>{{itemDetalhe.title}}</h4>
         <h6>by <div *ngFor="let autores of itemDetalhe.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
-        List Price: <div class="preco-tachado">${{itens.price}}</div><br>
+        List Price: <div class="preco-tachado">${{itemDetalhe.price}}</div><br>
         Our Price: <div class="preco">${{precoPromocional(itemDetalhe.price)}}</div><br>
         You Save: <div class="preco">${{desconto(itemDetalhe.price)}}</div><br>
         <b>ISBN:</b> {{itemDetalhe.ISBN}}<br>

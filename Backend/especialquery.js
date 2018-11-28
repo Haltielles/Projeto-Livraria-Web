@@ -39,7 +39,7 @@ exports.especialQuery = function especialQuery(app, con) {
     });
     //buscar dados livro por isbn
     app.route('/api/livraria/bookdescribe/:isbn').get((req, res) => {
-        var query = "SELECT * FROM bookdescriptions WHERE ISBN = '" + req.params.isbn + "'";
+        var query = "SELECT * FROM bookdescriptions WHERE ISBN ='" + req.params.isbn + "'";
         var resquery;
         console.log(query);
         //-------------------base de dados-----------------
@@ -100,6 +100,7 @@ exports.especialQuery = function especialQuery(app, con) {
         con.end;
         //--------------------------------------------------
     });
+    
     //buscar livros por author por id
     app.route('/api/livraria/bookauthor/:id').get((req, res) => {
         //pega todos os livros por categoria
@@ -138,4 +139,5 @@ exports.especialQuery = function especialQuery(app, con) {
         con.end;
         //--------------------------------------------------
     });
+    
 }

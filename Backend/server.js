@@ -15,8 +15,8 @@ const cors = require('cors');
 const mysql = require('mysql');
 const con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "nova_senha",
+    user: "phpmyadmin",
+    password: "root",
     database: "sandvigbookstore"
 });
 con.end;
