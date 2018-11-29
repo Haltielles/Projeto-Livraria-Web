@@ -1,50 +1,56 @@
 <div class="card-panel white col s6 m6 l6">
   <div class="row">
     <div class="input-field col s6 m6 l6">
-      <input #first_name type="text" class="validate">
+      <input #first_name type="text" class="validate" value="{{usuario.fname}}">
       <label for="first_name">First Name</label>
     </div>
 
     <div class="input-field col s6 m6 l6">
-      <input #last_name type="text" class="validate">
+      <input #last_name type="text" class="validate" value="{{usuario.lname}}">
       <label for="last_name">Last Name</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12 m12 l12">
-      <input #email type="email" class="validate" value="{{emailRepassado}}">
+      <input #email type="email" class="validate" value="{{usuario.email}}">
       <label for="email">Email</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12 m12 l12">
-      <input #street type="text" class="validate">
+      <input #street type="text" class="validate" value="{{usuario.street}}">
       <label for="street">Street</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s4 m4 l4">
-      <input #city type="text" class="validate">
+      <input #city type="text" class="validate" value="{{usuario.city}}">
       <label for="city">City</label>
     </div>
 
     <div class="input-field col s4 m4 l4">
-      <input #state type="text" class="validate">
+      <input #state type="text" class="validate" value="{{usuario.state}}">
       <label for="state">State</label>
     </div>
 
     <div class="input-field col s4 m4 l4">
-      <input #zip type="text" class="validate">
+      <input #zip type="text" class="validate" value="{{usuario.zip}}">
       <label for="zip">Zip Code</label>
     </div>
   </div>
 
   <div class="row">
-    <button class="btn waves-effect waves-light" (click)="confirmarCadastro( first_name.value, last_name.value, email.value, street.value, city.value, state.value, zip.value )" type="button">Cadastrar
+    <button class="btn waves-effect waves-light" id='cadastrar' (click)="confirmarCadastro( first_name.value, last_name.value, email.value, street.value, city.value, state.value, zip.value )"
+      type="button">{{btoCadastrar}}
       <i class="material-icons right">send</i>
     </button>
+    <button class="btn waves-effect waves-light" id='historico' disable="true" (click)="confirmarCadastro( first_name.value, last_name.value, email.value, street.value, city.value, state.value, zip.value )"
+      type="button">Ver Historico
+      <i class="material-icons right">receipt</i>
+    </button>
+
   </div>
 </div>

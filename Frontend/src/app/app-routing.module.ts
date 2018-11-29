@@ -34,7 +34,11 @@ const routes: Routes = [
     component: CadastroComponent
   },
   {
-    path: 'fecharcompra/:id',
+    path: 'cadastro',
+    component: CadastroComponent
+  },
+  {
+    path: 'fecharcompra',
     component: FecharcompraComponent
   }
 ];

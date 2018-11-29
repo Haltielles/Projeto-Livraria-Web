@@ -13,8 +13,10 @@ export class CadastroComponent implements OnInit {
   emailRepassado: string;
   usuarioID: string;
   usuarioNome: string;
+  usuarioEmail: string;
   usuario = new Usuario();
   retorno: Retorno;
+  btoCadastrar: string;
 
   constructor(private route: ActivatedRoute, private servUser: UsuarioService, private rota: Router) {
   }
@@ -22,7 +24,16 @@ export class CadastroComponent implements OnInit {
   ngOnInit() {
     this.usuarioID = localStorage.getItem('userID');
     this.usuarioNome = localStorage.getItem('userName');
-    //this.emailRepassado = this.route.snapshot.paramMap.get('email');
+    this.usuarioEmail = localStorage.getItem('email');
+    if (this.usuarioID !== '') {
+      this.servUser.getUsuario(this.usuarioEmail).subscribe(itens => {
+        this.usuario = itens;
+        document.getElementById('historico').setAttribute('disable', 'false');
+        this.btoCadastrar = 'Atualizar Cadastro e Finalizar Compra';
+      });
+    } else {
+      this.btoCadastrar = 'Cadastrar e Finalizar Compra';
+    }
   }
 
   confirmarCadastro(first_name: string, last_name: string, email: string, street: string, city: string, state: string, zip: string) {
@@ -33,7 +44,10 @@ export class CadastroComponent implements OnInit {
     this.usuario.city = city;
     this.usuario.state = state;
     this.usuario.zip = zip;
-    this.servUser.insertUsuario(this.usuario).subscribe(retorno => { this.retorno = retorno; });
-    this.rota.navigate(['cadastro/' + email]);
+    if (this.usuarioID !== '') {
+    } else {
+      this.servUser.insertUsuario(this.usuario).subscribe(retorno => { this.retorno = retorno; });
+    }
+    this.rota.navigate(['finalizarcompra']);
   }
 }

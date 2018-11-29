@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Carrinho } from '../Services/carrinho';
 import { CarrinhoService } from '../Services/carrinho.service';
 import { Router } from '@angular/router';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-carrinho',
@@ -14,11 +15,16 @@ export class CarrinhoComponent implements OnInit {
   subtotal: number;
   frete: number;
   total: number;
+  usuarioID: string;
+  usuarioNome: string;
 
   constructor(private carrinhoService: CarrinhoService, private rota: Router ) {
   }
 
   ngOnInit() {
+    this.usuarioID = localStorage.getItem('userID');
+    this.usuarioNome = localStorage.getItem('userName');
+    // observar este ponto
     this.carrinhoService.getCarrinhoId(1).subscribe(itens => {
       this.itensCar = itens;
       this.subtotal = this.subtotalCalculado();
@@ -57,7 +63,10 @@ export class CarrinhoComponent implements OnInit {
   }
 
   fecharCompra() {
-    localStorage.setItem('userID', '' );
-    this.rota.navigate(['login']);
+    if (isNull(this.usuarioID)) {
+      this.rota.navigate(['login']);
+    } else {
+      this.rota.navigate(['cadastro']);
+    }
   }
 }
