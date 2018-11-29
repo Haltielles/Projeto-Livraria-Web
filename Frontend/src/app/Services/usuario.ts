@@ -1,9 +1,12 @@
 export interface Usuario {
-    id: number;
-    login: string;
-    senha: string;
-    cep: string;
+    custID: number;
+    fname: string;
+    lname: string;
     email: string;
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
 }
 export class Usuario implements Usuario {
     constructor() { }

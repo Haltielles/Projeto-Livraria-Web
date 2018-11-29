@@ -1,6 +1,7 @@
 export interface Carrinho {
     id: number;
-    ISBN: number;
+    ISBN: string;
+    titulo: string;
     usuario_id: number;
     quantidade: number;
     valorunidade: number;

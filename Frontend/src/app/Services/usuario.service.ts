@@ -15,8 +15,8 @@ export class UsuarioService {
     return this.http.get<Retorno>('http://localhost:8000/api/livraria/usuario/valida/' + login + ',' + senha);
   }
 
-  getUsuario(id: string): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>('http://localhost:8000/api/livraria/usuario/get/' + id);
+  getUsuario(email: string): Observable<Usuario> {
+    return this.http.get<Usuario>('http://localhost:8000/api/livraria/usuario/get/' + email);
   }
 
   insertUsuario(usuario: Usuario): Observable<Retorno> {
@@ -24,7 +24,7 @@ export class UsuarioService {
   }
 
   updateUsuario(usuario: Usuario): Observable<Retorno> {
-    return this.http.put<Retorno>('http://localhost:8000/api/livraria/usuario/update/' + usuario.id, usuario);
+    return this.http.put<Retorno>('http://localhost:8000/api/livraria/usuario/update/' + usuario.custID, usuario);
   }
 
   deleteUsuario(id: string): Observable<Retorno> {

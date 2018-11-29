@@ -23,9 +23,9 @@ exports.servicoUsuario = function servicoUsuario(service, app, con, tabela) {
         //--------------------------------------------------
     });
 
-    //buscar dados Usuario por id
-    app.route('/api/' + service + '/get/:id').get((req, res) => {
-        var query = "SELECT * FROM " + tabela + " WHERE id = " + req.params.id;
+    //buscar dados Usuario por email
+    app.route('/api/' + service + '/get/:email').get((req, res) => {
+        var query = "SELECT * FROM " + tabela + " WHERE email = '" + req.params.email + "'";
         console.log(query);
         //-------------------base de dados-----------------
         con.connect(function (err) {
@@ -33,22 +33,32 @@ exports.servicoUsuario = function servicoUsuario(service, app, con, tabela) {
             con.query(query, function (err, result, fields) {
                 if (err) throw err;
                 console.log(result);
-                res.send(result);
+                if (result.length == 0) {
+                    res.send({ email: '' });
+                } else {
+                    var aux = JSON.stringify(result);
+                    aux = aux.substr(1, aux.length - 2);
+                    console.log(aux);
+                    res.send(JSON.parse(aux));
+                }
             });
         });
         con.end;
         //--------------------------------------------------
     });
 
+    
+    
+    
     //inserir novo Usuario
     app.route('/api/' + service + '/insert/').post((req, res) => {
         var myobj = req.body;
-        var query = "INSERT INTO " + tabela + " (login,senha,CEP,Email)" +
-            "VALUES ('" + myobj.login + "','" + myobj.senha + "','" + myobj.cep + "','" + myobj.email + "')";
+        var query = "INSERT INTO " + tabela + " (fname,lname,email,street,city,state,zip)" +
+            "VALUES ('" + myobj.fname + "','" + myobj.lname + "','" + myobj.email + "','" + myobj.street + "','" + myobj.city + "','" + myobj.state + "','" + myobj.zip  + "')";
         console.log(query);
         //--------------------base de dados--------------
         con.connect(function (err) {
-            if (err) throw err;
+            if (err) console.log(err);
             console.log("Connected!");
 
             con.query(query, function (err, result) {
@@ -81,6 +91,7 @@ exports.servicoUsuario = function servicoUsuario(service, app, con, tabela) {
         con.end;
         //-------------------------------------------------
     });
+    
     //delete category;
     app.route('/api/' + service + '/remove/:id').delete((req, res) => {
         var query = "DELETE FROM " + tabela + " WHERE id = " + req.params.id;

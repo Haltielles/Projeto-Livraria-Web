@@ -10,7 +10,7 @@ export class EmailsenderService {
 
   constructor(private http: HttpClient) { }
 
-  sendEmail(email: string, login: string, idcompra: number, valortotal: number): Observable<Retorno> {
-    return this.http.get<Retorno>('http://localhost:8000/api/livraria/sendemail/' + email + ',' + login + ',' + idcompra + ',' + valortotal);
+  sendEmail(email: string, fname: string, idcompra: number, valortotal: number): Observable<Retorno> {
+    return this.http.get<Retorno>('http://localhost:8000/api/livraria/sendemail/' + email + ',' + fname + ',' + idcompra + ',' + valortotal);
   }
 }

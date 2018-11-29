@@ -44,7 +44,6 @@ export class MenuComponent {
   ngOnInit() {
     this.bookCategory.getAllBookCategory().subscribe(itens => {
       this.itensCategory = itens;
-      console.log(this.itensCategory);
     });
   }
 }

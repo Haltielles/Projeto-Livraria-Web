@@ -13,8 +13,8 @@ export class EspecialqueryService {
   allBooks(): Observable<Livro[]> {
     return this.http.get<Livro[]>('http://localhost:8000/api/livraria/allbooks/');
   }
-  bookDescribe(isbn: string): Observable<Livro[]> {
-    return this.http.get<Livro[]>('http://localhost:8000/api/livraria/bookdescribe/' + isbn);
+  bookDescribe(isbn: string): Observable<Livro> {
+    return this.http.get<Livro>('http://localhost:8000/api/livraria/bookdescribe/' + isbn);
   }
   bookAuthor(id: string): Observable<Livro[]> {
     return this.http.get<Livro[]>('http://localhost:8000/api/livraria/bookauthor/' + id);

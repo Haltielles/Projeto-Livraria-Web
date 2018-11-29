@@ -51,12 +51,12 @@ exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
     //inserir nova compra
     app.route('/api/' + service + '/insert/').post((req, res) => {
         var myobj = req.body;
-        var query = "INSERT INTO " + tabela + " (ISBN,usuario_id,quantidade,valorunidade)" +
-            "VALUES ('" + myobj.ISBN + "','" + myobj.usuario_id + "','" + myobj.quantidade + "','" + myobj.valorunidade + "')";
+        var query = "INSERT INTO " + tabela + " (id,ISBN,usuario_id,quantidade,valorunidade,titulo)" +
+            " VALUES (" + myobj.id + ",'" + myobj.ISBN + "'," + myobj.usuario_id + "," + myobj.quantidade + "," + myobj.valorunidade + ",'" + myobj.titulo + "')";
         console.log(query);
         //--------------------base de dados--------------
         con.connect(function (err) {
-            if (err) throw err;
+            if (err) console.log(err);
             console.log("Connected!");
             con.query(query, function (err, result) {
                 if (err) throw err;

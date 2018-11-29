@@ -10,7 +10,9 @@ import { Retorno } from '../Services/Retorno';
 export class BookcategoryService {
 
   constructor(private http: HttpClient) { }
-
+  getAllBookCategory(): Observable<BookCategory[]> {
+    return this.http.get<BookCategory[]>('http://localhost:8000/api/livraria/bookcategory/getall');
+  }
   getBookCategory(id: string): Observable<BookCategory[]> {
     return this.http.get<BookCategory[]>('http://localhost:8000/api/livraria/bookcategory/get/' + id);
   }
@@ -23,7 +25,7 @@ export class BookcategoryService {
     return this.http.put<Retorno>('http://localhost:8000/api/livraria/bookcategory/update/' + bookcategory.CategoryID, bookcategory);
   }
 
-  deleteBookCategory(id: string):Observable<Retorno> {
+  deleteBookCategory(id: string): Observable<Retorno> {
     return this.http.delete<Retorno>('http://localhost:8000/api/livraria/bookcategory/remove/' + id);
   }
 }

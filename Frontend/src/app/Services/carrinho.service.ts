@@ -11,7 +11,7 @@ export class CarrinhoService {
 
   constructor(private http: HttpClient) { }
 
-  getCarrinhoId(id: string): Observable<Carrinho[]> {
+  getCarrinhoId(id: number): Observable<Carrinho[]> {
     return this.http.get<Carrinho[]>('http://localhost:8000/api/livraria/carrinho/get/' + id);
   }
 
@@ -19,7 +19,7 @@ export class CarrinhoService {
     return this.http.get<Carrinho[]>('http://localhost:8000/api/livraria/carrinho/getisbn/' + isbn);
   }
 
-  getCarrinhoUsuarioId(id: string): Observable<Carrinho[]> {
+  getCarrinhoUsuarioId(id: number): Observable<Carrinho[]> {
     return this.http.get<Carrinho[]>('http://localhost:8000/api/livraria/carrinho/getusuario/' + id);
   }
 
@@ -31,7 +31,7 @@ export class CarrinhoService {
     return this.http.put<Retorno>('http://localhost:8000/api/livraria/carrinho/update/' + carrinho.id, carrinho);
   }
 
-  deleteCarrinho(id: string): Observable<Retorno> {
+  deleteCarrinho(id: number): Observable<Retorno> {
     return this.http.delete<Retorno>('http://localhost:8000/api/livraria/carrinho/remove/' + id);
   }
 }

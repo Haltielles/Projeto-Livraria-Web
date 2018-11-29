@@ -13,9 +13,9 @@
         <h6>by <div *ngFor="let autores of itemDetalhe.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
-        List Price: <div class="preco-tachado">${{itemDetalhe.price}}</div><br>
-        Our Price: <div class="preco">${{precoPromocional(itemDetalhe.price)}}</div><br>
-        You Save: <div class="preco">${{desconto(itemDetalhe.price)}}</div><br>
+        List Price: <div class="preco-tachado">R$ {{itemDetalhe.price}}</div><br>
+        Our Price: <div class="preco">R$ {{precoPromocional(itemDetalhe.price)}}</div><br>
+        You Save: <div class="preco">R$ {{desconto(itemDetalhe.price)}}</div><br>
         <b>ISBN:</b> {{itemDetalhe.ISBN}}<br>
         <b>Publisher:</b> {{itemDetalhe.publisher}}<br>
         <b>Pages:</b> {{itemDetalhe.pages}}<br>
@@ -25,7 +25,9 @@
         </div>
       </div>
       <div class="card-action">
-        <h5><a href="#">Adicionar ao Carrinho</a></h5>
+          <button class="btn waves-effect waves-light" (click)="adicionaCarrinho()" name="action" routerLink="carrinho">Adicionar ao Carrinho
+            <i class="material-icons right">add_shopping_cart</i>
+          </button>
       </div>
     </div>
   </div>

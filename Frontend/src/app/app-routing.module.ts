@@ -5,6 +5,8 @@ import { ListaComponent } from './lista/lista.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { isBoolean } from 'util';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
 
 const routes: Routes = [
   {
@@ -20,8 +22,20 @@ const routes: Routes = [
     component: CarrinhoComponent
   },
   {
+    path: 'detalhes/:isbn/carrinho',
+    component: CarrinhoComponent
+  },
+  {
     path: 'detalhes/:isbn',
     component: DetalhesComponent
+  },
+  {
+    path: 'cadastro/:email',
+    component: CadastroComponent
+  },
+  {
+    path: 'fecharcompra/:id',
+    component: FecharcompraComponent
   }
 ];
 

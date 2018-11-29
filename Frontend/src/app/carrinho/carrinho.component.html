@@ -1,34 +1,50 @@
 <div class="col l10 m10 s10">
   <div class="row orange darken-2">
-    <div class="cabecalho col l2 m2 s2"><h6>Quantidade</h6></div>
-    <div class="cabecalho col l3 m3 s3"><h6>Preco Unitario</h6></div>
-    <div class="cabecalho col l3 m3 s3"><h6>Sub Total</h6></div>
-    <div class="cabecalho col l2 m2 s2"><h6>Remover</h6></div>
+    <div class="cabecalho col l2 m2 s2">
+      <h6>Quantidade</h6>
+    </div>
+    <div class="cabecalho col l3 m3 s3">
+      <h6>Preco Unitario</h6>
+    </div>
+    <div class="cabecalho col l3 m3 s3">
+      <h6>Sub Total</h6>
+    </div>
+    <div class="cabecalho col l2 m2 s2">
+      <h6>Remover</h6>
+    </div>
   </div>
 
   <ul class="collection">
-    <li class="collection-item avatar" *ngFor="let lista of itens">
-      <img src="assets/bookimages/{{lista.isbn}}.01.THUMBZZZ.jpg" alt="" class="circle">
-      <span class="title"><a href="detalhes?isbn={{lista.isbn}}">{{lista.title}}</a></span>
+    <li class="collection-item avatar" *ngFor="let lista of itensCar">
+      <img src="assets/bookimages/{{lista.ISBN}}.01.THUMBZZZ.jpg" alt="" class="circle">
+      <span class="title"><a href="detalhes?isbn={{lista.ISBN}}">{{lista.titulo}}</a></span>
       <div class="row">
         <div class="col l1 m1 s1" style="border-style: solid">
-          99
+          {{lista.quantidade}}
         </div>
         <div class="col l1 m1 s1">
           <a href="#" style="color: black"><i class="material-icons box white">add</i></a>
           <a href="#" style="color: black"><i class="material-icons box white">remove</i></a>
         </div>
-        <div class="col l3 m3 s3">R$ {{lista.price}}</div>
-        <div class="col l3 m3 s3">R$ {{lista.price}}</div>
+        <div class="col l3 m3 s3">R$ {{lista.valorunidade}}</div>
+        <div class="col l3 m3 s3">R$ {{valorCalculado(lista.valorunidade, lista.quantidade)}}</div>
         <div class="col l2 m2 s2"><a href="#" style="color: black"><i class="material-icons box white">remove_shopping_cart</i></a></div>
       </div>
     </li>
   </ul>
 
   <div class="row orange darken-2">
-      <div class="cabecalho col l2 m2 s2"><h6>Sub Total</h6></div>
-      <div class="cabecalho col l3 m3 s3"><h6>Frete</h6></div>
-      <div class="cabecalho col l3 m3 s3"><h6>Total</h6></div>
-      <div class="cabecalho col l2 m2 s2"><h6>Efetuar Compra</h6></div>
-    </div>  
+    <div class="cabecalho col l3 m3 s3">
+      <h6><b>Sub Total:</b> R$ {{subtotal}}</h6>
+    </div>
+    <div class="cabecalho col l3 m3 s3">
+      <h6><b>Frete:</b> R$ {{frete}}</h6>
+    </div>
+    <div class="cabecalho col l4 m4 s4">
+      <h6><b>Total:</b> R$ {{total}}</h6>
+    </div>
+  </div>
+  <button class="btn waves-effect waves-light" (click)="fecharCompra()" name="action" routerLink="carrinho">Fechar Compra
+      <i class="material-icons right">shopping_cart</i>
+    </button>
 </div>

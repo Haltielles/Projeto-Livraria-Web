@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaItem } from '../lista/listaitem';
-import { ItensCarrinho } from '../carrinho/ItensCarrinho';
-import { Bookdescription } from '../Services/bookdescription';
-import { BookdescriptionService } from '../Services/bookdescription.service';
+import { Carrinho } from '../Services/carrinho';
+import { CarrinhoService } from '../Services/carrinho.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho',
@@ -10,29 +9,55 @@ import { BookdescriptionService } from '../Services/bookdescription.service';
   styleUrls: ['./carrinho.component.css']
 })
 export class CarrinhoComponent implements OnInit {
-  public a: Bookdescription;
-  itensBase: Bookdescription[];
-  itens = new Array<ListaItem>();
-  itensCar = new Array<ItensCarrinho>();
+  itensCar = new Array<Carrinho>();
+  itensCarCalc = new Array<Carrinho>();
+  subtotal: number;
+  frete: number;
+  total: number;
 
-  constructor(private servBookDesk: BookdescriptionService) {
+  constructor(private carrinhoService: CarrinhoService, private rota: Router ) {
   }
 
   ngOnInit() {
-    this.servBookDesk.getBooksDescriptions().subscribe(itens => {
-      this.itensBase = itens;
-      for (let entry of itens) {
-//        this.itens.push(new ListaItem(entry.ISBN, entry.title, ['test', 'domingo'], entry.description, entry.price, entry.publisher, entry.pubdate, entry.edition, entry.pages));
-      }
+    this.carrinhoService.getCarrinhoId(1).subscribe(itens => {
+      this.itensCar = itens;
+      this.subtotal = this.subtotalCalculado();
+      this.frete = this.freteCalculado();
+      this.total = this.totalCalculado();
     });
   }
-
-  insereItem(item: ListaItem) {
-//    this.itensCar.push(new ItensCarrinho(item.isbn, item.title, item.price, 1));
-  }
-
   retiraItem(ISBN: number) {
     this.itensCar.splice(3, 1);
   }
 
+  valorCalculado(preco: number, quantidade: number): number {
+    return preco * quantidade;
+  }
+
+  subtotalCalculado(): number {
+    let subtotal = 0;
+    for (let a = 0; a < this.itensCar.length; a++) {
+      subtotal = subtotal + (this.itensCar[a].quantidade * this.itensCar[a].valorunidade);
+    }
+    return subtotal;
+  }
+
+  freteCalculado(): number {
+    if (this.itensCar.length === 1) {
+      return 10;
+    } else if (this.itensCar.length > 1) {
+      return ( 10 + ( (this.itensCar.length - 1) * 5 ) );
+    } else {
+      return 0;
+    }
+  }
+
+  totalCalculado(): number {
+    return (this.subtotal + this.frete);
+  }
+
+  fecharCompra() {
+    localStorage.setItem('userID', '' );
+    this.rota.navigate(['login']);
+  }
 }

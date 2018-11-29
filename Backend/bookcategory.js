@@ -36,6 +36,23 @@ exports.servicoBookCategory = function servicoBookCategory(service, app, con, ta
     //-----------------------------------------------
   });
 
+//buscar todos bookcategory 
+  app.route('/api/' + service + '/getall').get((req, res) => {
+    var query = "SELECT * FROM " + tabela;
+    console.log(query);
+    //-------------------base de dados-----------------
+    con.connect(function (err) {
+      if (err) console.log(err);
+      con.query(query, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+      });
+    });
+    con.end;
+    //--------------------------------------------------
+  });
+  
   //altera categoria por id
   app.route('/api/' + service + '/update/:id').put((req, res) => {
     var query = "UPDATE " + tabela + " SET CategoryName = '" + req.body.CategoryName + "' WHERE CategoryID = '" + req.params.id + "'";
