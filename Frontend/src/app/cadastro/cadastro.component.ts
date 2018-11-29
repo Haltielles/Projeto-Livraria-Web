@@ -25,7 +25,7 @@ export class CadastroComponent implements OnInit {
     this.usuarioID = localStorage.getItem('userID');
     this.usuarioNome = localStorage.getItem('userName');
     this.usuarioEmail = localStorage.getItem('email');
-    if (this.usuarioID !== '') {
+    if (this.usuarioID !== null) {
       this.servUser.getUsuario(this.usuarioEmail).subscribe(itens => {
         this.usuario = itens;
         document.getElementById('historico').setAttribute('disable', 'false');

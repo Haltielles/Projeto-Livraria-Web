@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
       if (this.usuario.email !== '') {
         localStorage.setItem('userID', this.usuario.custID.toString());
         localStorage.setItem('userName', (this.usuario.fname + ' ' + this.usuario.lname));
-        localStorage.setItem('email', email);
+        window.location.reload();
       }
+      localStorage.setItem('email', email);
       this.rota.navigate(['cadastro']);
     });
 }
