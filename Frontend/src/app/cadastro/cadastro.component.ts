@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../Services/usuario.service';
 import { Usuario } from '../Services/usuario';
 import { Retorno } from '../Services/Retorno';
+import { EmailsenderService } from '../Services/emailsender.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ export class CadastroComponent implements OnInit {
   retorno: Retorno;
   btoCadastrar: string;
 
-  constructor(private route: ActivatedRoute, private servUser: UsuarioService, private rota: Router) {
+  constructor(private route: ActivatedRoute, private servUser: UsuarioService, private rota: Router, private emailSend: EmailsenderService) {
   }
 
   ngOnInit() {
@@ -44,10 +45,22 @@ export class CadastroComponent implements OnInit {
     this.usuario.city = city;
     this.usuario.state = state;
     this.usuario.zip = zip;
-    if (this.usuarioID !== '') {
+    if (this.usuarioID !== null) {
+      this.servUser.updateUsuario(this.usuario).subscribe(retorno => {
+        this.retorno = retorno;
+        this.emailSend.sendEmail(this.usuario.email, (this.usuario.fname + ' ' + this.usuario.lname), 1, Number.parseFloat(localStorage.getItem('totalCompra'))).subscribe(retorno => {
+          this.retorno = retorno;
+          this.rota.navigate(['fecharcompra']);
+        });
+      });
     } else {
-      this.servUser.insertUsuario(this.usuario).subscribe(retorno => { this.retorno = retorno; });
+      this.servUser.insertUsuario(this.usuario).subscribe(retorno => {
+        this.retorno = retorno;
+        this.emailSend.sendEmail(this.usuario.email, (this.usuario.fname + ' ' + this.usuario.lname), 1, Number.parseFloat(localStorage.getItem('totalCompra'))).subscribe(retorno => {
+          this.retorno = retorno;
+          this.rota.navigate(['fecharcompra']);
+        });
+      });
     }
-    this.rota.navigate(['finalizarcompra']);
   }
 }

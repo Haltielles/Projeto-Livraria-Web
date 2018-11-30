@@ -3,6 +3,8 @@ import { Carrinho } from '../Services/carrinho';
 import { CarrinhoService } from '../Services/carrinho.service';
 import { Router } from '@angular/router';
 import { isNull } from 'util';
+import { Retorno } from '../Services/Retorno';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-carrinho',
@@ -17,8 +19,9 @@ export class CarrinhoComponent implements OnInit {
   total: number;
   usuarioID: string;
   usuarioNome: string;
+  retorno: Retorno;
 
-  constructor(private carrinhoService: CarrinhoService, private rota: Router ) {
+  constructor(private carrinhoService: CarrinhoService, private rota: Router) {
   }
 
   ngOnInit() {
@@ -30,10 +33,35 @@ export class CarrinhoComponent implements OnInit {
       this.subtotal = this.subtotalCalculado();
       this.frete = this.freteCalculado();
       this.total = this.totalCalculado();
+      localStorage.setItem('totalCompra', this.total.toString());
     });
   }
-  retiraItem(ISBN: number) {
-    this.itensCar.splice(3, 1);
+
+  retiraItem(id: number, ISBN: string) {
+    this.carrinhoService.deleteItemCarrinho(id, ISBN).subscribe(retorno => {
+      this.retorno = retorno;
+      window.location.reload();
+    });
+  }
+
+  alteraQtdeMais(item: Carrinho) {
+    item.quantidade ++;
+    this.carrinhoService.updateCarrinho(item).subscribe(retorno => {
+      this.retorno = retorno;
+      window.location.reload();
+    });
+  }
+
+  alteraQtdeMenos(item: Carrinho) {
+    if ( item.quantidade === 1) {
+      this.retiraItem(item.id, item.ISBN);
+    } else {
+      item.quantidade --;
+      this.carrinhoService.updateCarrinho(item).subscribe(retorno => {
+        this.retorno = retorno;
+        window.location.reload();
+      });
+    }
   }
 
   valorCalculado(preco: number, quantidade: number): number {
@@ -52,7 +80,7 @@ export class CarrinhoComponent implements OnInit {
     if (this.itensCar.length === 1) {
       return 10;
     } else if (this.itensCar.length > 1) {
-      return ( 10 + ( (this.itensCar.length - 1) * 5 ) );
+      return (10 + ((this.itensCar.length - 1) * 5));
     } else {
       return 0;
     }

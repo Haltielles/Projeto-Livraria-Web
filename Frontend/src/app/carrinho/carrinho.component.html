@@ -23,12 +23,21 @@
           {{lista.quantidade}}
         </div>
         <div class="col l1 m1 s1">
-          <a href="#" style="color: black"><i class="material-icons box white">add</i></a>
-          <a href="#" style="color: black"><i class="material-icons box white">remove</i></a>
+          <button class="material-icons box white" (click)="alteraQtdeMais(lista)" type="button">
+              <i class="material-icons box white">add</i>
+          </button>
+          <button class="material-icons box white" (click)="alteraQtdeMenos(lista)" type="button">
+            <i class="material-icons box white">remove</i>
+          </button>
+
+          <a href="#" style="color: black"></a>
+          <a href="#" style="color: black"></a>
         </div>
         <div class="col l3 m3 s3">R$ {{lista.valorunidade}}</div>
         <div class="col l3 m3 s3">R$ {{valorCalculado(lista.valorunidade, lista.quantidade)}}</div>
-        <div class="col l2 m2 s2"><a href="#" style="color: black"><i class="material-icons box white">remove_shopping_cart</i></a></div>
+        <button class="material-icons box white" (click)="retiraItem(1, lista.ISBN)" type="button">
+          <i class="material-icons box white">remove_shopping_cart</i>
+        </button>
       </div>
     </li>
   </ul>
@@ -44,11 +53,12 @@
       <h6><b>Total:</b> R$ {{total}}</h6>
     </div>
   </div>
-  
+
   <button class="btn waves-effect waves-light" name="action" routerLink="">Continuar comprando
     <i class="material-icons right">shopping_cart</i>
   </button>
-  <button class="btn waves-effect waves-light" (click)="fecharCompra()" name="action" routerLink="carrinho">Fechar Compra
+  <button class="btn waves-effect waves-light" (click)="fecharCompra()" name="action" routerLink="carrinho">Fechar
+    Compra
     <i class="material-icons right">monetization_on</i>
   </button>
 

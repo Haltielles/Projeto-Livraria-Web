@@ -2,7 +2,6 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { UsuarioService } from '../Services/usuario.service';
 import { Usuario } from '../Services/usuario';
 import { Router } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',

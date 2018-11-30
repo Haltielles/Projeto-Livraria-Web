@@ -5,7 +5,7 @@ exports.emailSender = function emailSender(app, nodemailer) {
             service: 'gmail',
             auth: {
                 user: 'haltiellestil@gmail.com',
-                pass: 'colocar email aqui'
+                pass: 'haltielles9331619'
             }
         });
         var mailOptions = {

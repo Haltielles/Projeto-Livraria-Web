@@ -69,12 +69,12 @@ exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
     });
 
     //altera carrinho por id
-    app.route('/api/' + service + '/update/:id').put((req, res) => {
+    app.route('/api/' + service + '/update/:id,:isbn').put((req, res) => {
         var query = "UPDATE " + tabela + " SET ISBN = '" + req.body.ISBN + "'," +
             "usuario_id = '" + req.body.usuario_id + "'," +
             "quantidade = '" + req.body.quantidade + "'," +
             "valorunidade = '" + req.body.valorunidade + "'" +
-            " WHERE id = '" + req.params.id + "'";
+            " WHERE id = " + req.params.id + " AND ISBN = '" + req.params.isbn + "'";
         console.log(query);
         //--------------------base de dados---------
         con.connect(function (err) {
@@ -88,13 +88,28 @@ exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
         con.end;
         //-------------------------------------------------
     });
-    //delete compra;
-    app.route('/api/' + service + '/remove/:id').delete((req, res) => {
-        var query = "DELETE FROM " + tabela + " WHERE id_compra = " + req.params.id;
+    //delete carrinho inteiro;
+    app.route('/api/' + service + '/removecarrinho/:id').delete((req, res) => {
+        var query = "DELETE FROM " + tabela + " WHERE id = " + req.params.id;
         console.log(query);
         //--------------------base de dados---------------
         con.connect(function (err) {
-            if (err) throw err;
+            if (err) console.log(err);
+            con.query(query, function (err, result) {
+                if (err) throw err;
+                console.log("Number of records deleted: " + result.affectedRows);
+                res.send({ success: true, message: 'deletado com sucesso' });
+            });
+        });
+        //--------------------------------------------
+    });
+    //delete  item carrinho carrinho;
+    app.route('/api/' + service + '/removeitemcarrinho/:id,:isbn').delete((req, res) => {
+        var query = "DELETE FROM " + tabela + " WHERE id = " + req.params.id + " AND ISBN = '" + req.params.isbn + "'";
+        console.log(query);
+        //--------------------base de dados---------------
+        con.connect(function (err) {
+            if (err) console.log(err);
             con.query(query, function (err, result) {
                 if (err) throw err;
                 console.log("Number of records deleted: " + result.affectedRows);

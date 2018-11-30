@@ -38,12 +38,16 @@ export class DetalhesComponent {
 
   adicionaCarrinho() {
     this.carrinhoItens.id = 1;
+    this.carrinhoItens.titulo = this.itemDetalhe.title;
     this.carrinhoItens.ISBN = this.itemDetalhe.ISBN;
     this.carrinhoItens.quantidade = 1;
     this.carrinhoItens.valorunidade = this.itemDetalhe.price;
     this.carrinhoItens.usuario_id = 0;
 
-    this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {this.retorno = retorno; });
+    this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
+      this.retorno = retorno;
+      window.location.reload();
+    });
   }
 
 }

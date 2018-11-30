@@ -28,10 +28,14 @@ export class CarrinhoService {
   }
 
   updateCarrinho(carrinho: Carrinho): Observable<Retorno> {
-    return this.http.put<Retorno>('http://localhost:8000/api/livraria/carrinho/update/' + carrinho.id, carrinho);
+    return this.http.put<Retorno>('http://localhost:8000/api/livraria/carrinho/update/' + carrinho.id + ',' + carrinho.ISBN, carrinho);
   }
 
   deleteCarrinho(id: number): Observable<Retorno> {
-    return this.http.delete<Retorno>('http://localhost:8000/api/livraria/carrinho/remove/' + id);
+    return this.http.delete<Retorno>('http://localhost:8000/api/livraria/carrinho/removecarrinho/' + id);
+  }
+
+  deleteItemCarrinho(id: number, isbn: string): Observable<Retorno> {
+    return this.http.delete<Retorno>('http://localhost:8000/api/livraria/carrinho/removeitemcarrinho/' + id + ',' + isbn);
   }
 }

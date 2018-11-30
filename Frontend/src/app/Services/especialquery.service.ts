@@ -13,6 +13,9 @@ export class EspecialqueryService {
   allBooks(): Observable<Livro[]> {
     return this.http.get<Livro[]>('http://localhost:8000/api/livraria/allbooks/');
   }
+  carrinhoSCompra(id: string): Observable<Livro> {
+    return this.http.get<Livro>('http://localhost:8000/api/livraria/carrinhoscompra/' + id);
+  }
   bookDescribe(isbn: string): Observable<Livro> {
     return this.http.get<Livro>('http://localhost:8000/api/livraria/bookdescribe/' + isbn);
   }

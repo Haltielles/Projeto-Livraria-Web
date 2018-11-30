@@ -73,11 +73,14 @@ exports.servicoUsuario = function servicoUsuario(service, app, con, tabela) {
 
     //altera Usuario por id
     app.route('/api/' + service + '/update/:id').put((req, res) => {
-        var query = "UPDATE " + tabela + " SET login = '" + req.body.login + "'," +
-            "senha = '" + req.body.senha + "'," +
-            "CEP = '" + req.body.cep + "'," +
-            "Email = '" + req.body.email + "'" +
-            " WHERE id = '" + req.params.id + "'";
+        var query = "UPDATE " + tabela + " SET fname = '" + req.body.fname + "'," +
+            "lname = '" + req.body.lname + "'," +
+            "email = '" + req.body.email + "'," +
+            "street = '" + req.body.street + "'," +
+	    "city = '" + req.body.city + "'," +
+	    "state = '" + req.body.state + "'," +
+	    "zip = '" + req.body.zip + "'" +
+            " WHERE custID = '" + req.params.id + "'";
         console.log(query);
         //--------------------base de dados---------
         con.connect(function (err) {

@@ -7,6 +7,7 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
 import { isBoolean } from 'util';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
+import { ListabuscaComponent } from './listabusca/listabusca.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'fecharcompra',
     component: FecharcompraComponent
+  },
+  {
+    path: 'listabusca/:id',
+    component: ListabuscaComponent
   }
 ];
 

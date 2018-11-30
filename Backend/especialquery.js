@@ -1,4 +1,20 @@
 exports.especialQuery = function especialQuery(app, con) {
+    //controle carrinho service retorna carrinho não vinculado a compra
+    app.route('/api/livraria/carrinhoscompra/:id').get((req, res) => {
+        var query = "SELECT a.id FROM carrinhos as a LEFT OUTER JOIN compras as b on ( a.id != b.id_carrinho ) WHERE a.usuario_id = " + req.params.id + " AND b.id_usuario = " + req.params.id;
+        console.log(query);
+        //-------------------base de dados-----------------
+        con.connect(function (err) {
+            if (err) console.log(err);
+            con.query(query, function (err, result, fields) {
+                if (err) console.log(err);
+                console.log(result);
+                res.send(result);
+            });
+        });
+        con.end;
+        //--------------------------------------------------
+    });
     //buscar todos os livros 
     app.route('/api/livraria/allbooks').get((req, res) => {
         //pega todos os livros por categoria
@@ -141,3 +157,4 @@ exports.especialQuery = function especialQuery(app, con) {
     });
     
 }
+
