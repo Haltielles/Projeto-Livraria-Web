@@ -15,8 +15,8 @@ export class BookdescriptionService {
     return this.http.get<Bookdescription[]>('http://localhost:8000/api/livraria/bookdescription/get/all');
   }
 
-  getBookDescription(isbn: string): Observable<Bookdescription[]> {
-    return this.http.get<Bookdescription[]>('http://localhost:8000/api/livraria/bookdescription/get/' + isbn);
+  getBookDescription(palavraChave: string): Observable<Bookdescription[]> {
+    return this.http.get<Bookdescription[]>('http://localhost:8000/api/livraria/bookdescription/get/' + palavraChave);
   }
 
   insertBookDescription(bookdescription: Bookdescription): Observable<Retorno> {
@@ -27,7 +27,7 @@ export class BookdescriptionService {
     return this.http.put<Retorno>('http://localhost:8000/api/livraria/bookdescription/update/' + bookdescription.ISBN, bookdescription);
   }
 
-  deleteBookDescription(isbn: string):Observable<Retorno> {
+  deleteBookDescription(isbn: string): Observable<Retorno> {
     return this.http.delete<Retorno>('http://localhost:8000/api/livraria/bookdescription/remove/' + isbn);
   }
 }

@@ -8,7 +8,7 @@ import { Livro } from '../Services/especialquery';
   styleUrls: ['./lista.component.css']
 })
 
-export class ListaComponent {
+export class ListaComponent implements OnInit {
   itensAll = new Array<Livro>();
   itensTelaInicial = new Array<Livro>();
 

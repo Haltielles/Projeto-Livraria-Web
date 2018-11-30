@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EspecialqueryService } from '../Services/especialquery.service';
 import { Livro } from '../Services/especialquery';
 import { CarrinhoService } from '../Services/carrinho.service';
@@ -11,7 +11,7 @@ import { Retorno } from '../Services/Retorno';
   templateUrl: './detalhes.component.html',
   styleUrls: ['./detalhes.component.css']
 })
-export class DetalhesComponent {
+export class DetalhesComponent implements OnInit {
   isbnRepassado: string;
   itemDetalhe = new Livro();
   carrinhoItens = new Carrinho();

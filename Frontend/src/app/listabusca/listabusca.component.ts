@@ -16,12 +16,9 @@ export class ListabuscaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.especialQuery.allBooks().subscribe(itens => {
+    this.especialQuery.bookCategoria( this.route.snapshot.paramMap.get('id')).subscribe(itens => {
       this.itensBusca = itens;
     });
-//    this.especialQuery.bookCategoria( this.route.snapshot.paramMap.get('id')).subscribe(itens => {
-  //    this.itensBusca = itens;
-    //});
   }
 
   descricaoResumida(descricao: String): String {

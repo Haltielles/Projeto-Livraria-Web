@@ -35,7 +35,7 @@ import { BookCategory } from '../Services/bookcategory';
   styleUrls: ['./menu.component.css']
 })
 
-export class MenuComponent {
+export class MenuComponent implements OnInit {
   itensCategory = new Array<BookCategory>();
 
   constructor(private bookCategory: BookcategoryService) {

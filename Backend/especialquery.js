@@ -15,6 +15,7 @@ exports.especialQuery = function especialQuery(app, con) {
         con.end;
         //--------------------------------------------------
     });
+    
     //buscar todos os livros 
     app.route('/api/livraria/allbooks').get((req, res) => {
         //pega todos os livros
@@ -54,7 +55,7 @@ exports.especialQuery = function especialQuery(app, con) {
         //--------------------------------------------------
     });
     
-    //buscar livros por categoria por id
+    //buscar todos os livros por categoria DOMINGOS
     app.route('/api/livraria/bookcategorie/:id').get((req, res) => {
         //pega todos os livros por categoria
         query = "SELECT b.ISBN,b.title,b.description,b.price,b.publisher,b.pubdate,b.edition,b.pages FROM bookcategoriesbooks AS a LEFT OUTER JOIN bookdescriptions AS b on ( a.ISBN = b.ISBN ) WHERE a.CategoryID = " + req.params.id;
@@ -82,7 +83,7 @@ exports.especialQuery = function especialQuery(app, con) {
                         console.log(aux + '"authors":' + JSON.stringify(result) + "}");
                         resquery[control] = JSON.parse(aux + '"authors":' + JSON.stringify(result) + "}");
                         if (control == resquery.length - 1) {
-                            res.send(resquery[0]);
+                            res.send(resquery);
                         }
                         control++;
                     });
@@ -90,10 +91,8 @@ exports.especialQuery = function especialQuery(app, con) {
             });
         });
         con.end;
-        //--------------------------------------------------    
-
-    });
-    
+        //--------------------------------------------------
+    });    
     
     //buscar dados livro por isbn
     app.route('/api/livraria/bookdescribe/:isbn').get((req, res) => {
