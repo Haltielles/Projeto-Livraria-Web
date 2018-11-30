@@ -54,7 +54,44 @@ exports.especialQuery = function especialQuery(app, con) {
         con.end;
         //--------------------------------------------------
     });
-    
+    //buscar todos os livros por titulo Haltielles
+    app.route('/api/livraria/booktitle/:title').get((req, res) => {
+        //pega todos os livros por categoria
+        query = "SELECT * FROM bookdescriptions AS b WHERE b.title LIKE '%%" + req.params.title + "%%'";
+        console.log(query);
+        var resquery = new Array();
+        con.connect(function (err) {
+            if (err) console.log(err);
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                resquery = result;
+                console.log(resquery);
+                //amontar array de authors por isbn
+                var control = i = 0
+                for (i = 0; i < resquery.length; i++) {
+                    console.log(resquery[i].ISBN);
+                    query = "SELECT a.AuthorID, a.nameF, a.nameL FROM bookauthors AS a LEFT OUTER JOIN bookauthorsbooks AS b on ( a.AuthorID = b.AuthorID ) WHERE b.ISBN = '" + resquery[i].ISBN + "'";
+                    console.log(query);
+                    if (err) console.log(err);
+                    con.query(query, function (err, result, fields) {
+                        if (err) console.log(err);
+                        console.log(result);
+                        console.log(control);
+                        var aux = JSON.stringify(resquery[control]);
+                        aux = aux.substr(0, aux.length - 1) + ",";
+                        console.log(aux + '"authors":' + JSON.stringify(result) + "}");
+                        resquery[control] = JSON.parse(aux + '"authors":' + JSON.stringify(result) + "}");
+                        if (control == resquery.length - 1) {
+                            res.send(resquery);
+                        }
+                        control++;
+                    });
+                }
+            });
+        });
+        con.end;
+        //--------------------------------------------------
+    }); 
     //buscar todos os livros por categoria DOMINGOS
     app.route('/api/livraria/bookcategorie/:id').get((req, res) => {
         //pega todos os livros por categoria

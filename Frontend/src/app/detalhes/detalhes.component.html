@@ -10,7 +10,7 @@
     <div>
       <div class="card-panel white">
         <h4>{{itemDetalhe.title}}</h4>
-        <h6>by <div *ngFor="let autores of itemDetalhe.authors"><a href="autores?{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
+        <h6>by <div *ngFor="let autores of itemDetalhe.authors"><a href="listabusca/authors/{{autores.AuthorID}}">{{autores.nameL}}, {{autores.nameF}}</a></div></h6>
       </div>
       <div class="card-panel white">
         List Price: <div class="preco-tachado">R$ {{itemDetalhe.price}}</div><br>

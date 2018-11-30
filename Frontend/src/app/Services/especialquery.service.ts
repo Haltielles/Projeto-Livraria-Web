@@ -25,4 +25,7 @@ export class EspecialqueryService {
   bookCategoria(id: string): Observable<Livro[]> {
     return this.http.get<Livro[]>('http://localhost:8000/api/livraria/bookcategorie/' + id);
   }
+  bookTitle(title: string): Observable<Livro[]> {
+    return this.http.get<Livro[]>('http://localhost:8000/api/livraria/booktitle/' + title);
+  }
 }

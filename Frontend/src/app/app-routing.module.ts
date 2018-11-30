@@ -43,7 +43,7 @@ const routes: Routes = [
     component: FecharcompraComponent
   },
   {
-    path: 'listabusca/:id',
+    path: 'listabusca/:tipo/:id',
     component: ListabuscaComponent
   }
 ];

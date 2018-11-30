@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BookdescriptionService } from '../Services/bookdescription.service';
-import { Bookdescription } from '../Services/bookdescription';
 import { Router } from '@angular/router';
+import { Livro } from '../Services/especialquery';
+import { EspecialqueryService } from '../Services/especialquery.service';
 
 @Component({
   selector: 'app-search',
@@ -9,19 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  itensBusca = new Array<Bookdescription>();
+  itensBusca = new Array<Livro>();
 
-  constructor(private buscaDescricao: BookdescriptionService, private rota: Router) {
+  constructor(private buscaTitulo: EspecialqueryService, private rota: Router) {
   }
 
   ngOnInit() {
   }
 
-  busca( palavraChave: string ) {
-    this.rota.navigate(['listabusca/' + palavraChave]);
-    this.buscaDescricao.getBookDescription( palavraChave ).subscribe(itens => {
-      this.itensBusca = itens;
-    });
+  busca(titulo: string) {
+    console.log(titulo);
+    this.rota.navigate(['listabusca/title/' + titulo]);
+    window.location.reload();
   }
 
   descricaoResumida(descricao: String): String {

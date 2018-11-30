@@ -1,8 +1,8 @@
 <div class="card-panel white">
   <div class="menuBorder">
-    <input type="text" id="search" autofocus />
-    <button class="material-icons box white" (click)="busca(search. search)" type="button">
-      <i class="material-icons box white">search</i>
+    <input #search type="text" id="search" autofocus />
+    <button class="btn waves-effect waves-light" (click)="busca(search.value)" type="button">Pesquisar
+      <i class="material-icons right">search</i>
     </button>
   </div>
 </div>

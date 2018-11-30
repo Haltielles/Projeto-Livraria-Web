@@ -15,7 +15,22 @@ exports.servicoBookCategory = function servicoBookCategory(service, app, con, ta
     con.end;
     //--------------------------------------------------
   });
-
+  app.route('/api/' + service + '/getall').get((req, res) => {
+    
+    var query = "SELECT a.CategoryID, a.CategoryName FROM bookcategories AS a INNER JOIN bookcategoriesbooks AS b ON ( a.CategoryID = b.CategoryID ) GROUP BY a.CategoryID";
+    console.log(query);
+    //-------------------base de dados-----------------
+    con.connect(function (err) {
+      if (err) console.log(err);
+      con.query(query, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+      });
+    });
+    con.end;
+    //--------------------------------------------------
+  });
   //inserir novo bookcategory
   app.route('/api/' + service + '/insert/').post((req, res) => {
     var myobj = req.body;

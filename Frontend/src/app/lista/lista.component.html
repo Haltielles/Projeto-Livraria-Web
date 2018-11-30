@@ -6,7 +6,7 @@
     <div class="card-stacked">
       <div class="card-content">
         <span class="card-title"><a href="detalhes/{{lista.ISBN}}">{{lista.title}}</a></span>
-        <b>Authors</b><div *ngFor="let autor of lista.authors"><a href="authors?{{autor.AuthorID}}">{{autor.nameL}}, {{autor.nameF}}</a></div>
+        <b>Authors</b><div *ngFor="let autor of lista.authors"><a href="listabusca/authors/{{autor.AuthorID}}">{{autor.nameL}}, {{autor.nameF}}</a></div>
         {{descricaoResumida(lista.description)}}...
         <a href="detalhes/{{lista.ISBN}}"><b>mais detalhes</b></a>
       </div>

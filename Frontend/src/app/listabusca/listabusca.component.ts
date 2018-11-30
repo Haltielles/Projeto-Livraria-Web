@@ -11,14 +11,34 @@ import { ActivatedRoute } from '@angular/router';
 
 export class ListabuscaComponent implements OnInit {
   itensBusca = new Array<Livro>();
+  busca: string;
+  tipo: string;
 
   constructor(private especialQuery: EspecialqueryService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.especialQuery.bookCategoria( this.route.snapshot.paramMap.get('id')).subscribe(itens => {
-      this.itensBusca = itens;
-    });
+    this.tipo = this.route.snapshot.paramMap.get('tipo');
+    this.busca = this.route.snapshot.paramMap.get('id');
+    console.log(this.tipo);
+    console.log(this.busca);
+
+    if ( this.tipo === 'title' ) {
+      this.especialQuery.bookTitle(this.busca).subscribe(itens => {
+        this.itensBusca = itens;
+//        window.location.reload();
+      });
+    } else if ( this.tipo === 'categoria' ) {
+      this.especialQuery.bookCategoria(this.busca).subscribe(itens => {
+        this.itensBusca = itens;
+//        window.location.reload();
+      });
+    } else if ( this.tipo === 'authors' ) {
+      this.especialQuery.bookAuthor(this.busca).subscribe(itens => {
+        this.itensBusca = itens;
+      });
+//      window.location.reload();
+    }
   }
 
   descricaoResumida(descricao: String): String {
