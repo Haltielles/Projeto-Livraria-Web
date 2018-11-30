@@ -23,21 +23,24 @@ export class ListabuscaComponent implements OnInit {
     console.log(this.tipo);
     console.log(this.busca);
 
-    if ( this.tipo === 'title' ) {
+    if (this.tipo === 'title') {
       this.especialQuery.bookTitle(this.busca).subscribe(itens => {
         this.itensBusca = itens;
-//        window.location.reload();
       });
-    } else if ( this.tipo === 'categoria' ) {
-      this.especialQuery.bookCategoria(this.busca).subscribe(itens => {
-        this.itensBusca = itens;
-//        window.location.reload();
-      });
-    } else if ( this.tipo === 'authors' ) {
+    } else if (this.tipo === 'categoria') {
+      if (this.busca === 'all') {
+        this.especialQuery.allBooks().subscribe(itens => {
+          this.itensBusca = itens;
+        });
+      } else {
+        this.especialQuery.bookCategoria(this.busca).subscribe(itens => {
+          this.itensBusca = itens;
+        });
+      }
+    } else if (this.tipo === 'authors') {
       this.especialQuery.bookAuthor(this.busca).subscribe(itens => {
         this.itensBusca = itens;
       });
-//      window.location.reload();
     }
   }
 
