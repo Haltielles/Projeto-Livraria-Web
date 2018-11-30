@@ -17,7 +17,7 @@ exports.especialQuery = function especialQuery(app, con) {
     });
     //buscar todos os livros 
     app.route('/api/livraria/allbooks').get((req, res) => {
-        //pega todos os livros por categoria
+        //pega todos os livros
         query = "SELECT * FROM `bookdescriptions`";
         console.log(query);
         var resquery = new Array();
@@ -53,31 +53,7 @@ exports.especialQuery = function especialQuery(app, con) {
         con.end;
         //--------------------------------------------------
     });
-    //buscar dados livro por isbn
-    app.route('/api/livraria/bookdescribe/:isbn').get((req, res) => {
-        var query = "SELECT * FROM bookdescriptions WHERE ISBN ='" + req.params.isbn + "'";
-        var resquery;
-        console.log(query);
-        //-------------------base de dados-----------------
-        con.connect(function (err) {
-            if (err) console.log(err);
-            con.query(query, function (err, result, fields) {
-                if (err) throw err;
-                resquery = JSON.stringify(result);
-                resquery = resquery.substr(1, resquery.length - 3) + ",";
-            });
-            query = "SELECT b.AuthorID,b.nameF,b.nameL FROM bookauthorsbooks AS a LEFT OUTER JOIN bookauthors AS b ON (a.AuthorID=b.AuthorID) WHERE a.ISBN = '" + req.params.isbn + "'";
-            console.log(query);
-            con.query(query, function (err, result, fields) {
-                if (err) throw err;
-                console.log(result);
-                var autores = JSON.stringify(result);
-                var resposta = JSON.parse(resquery + '"authors":' + autores + "}");
-                res.send(resposta);
-            });
-        });
-        con.end;
-    });
+    
     //buscar livros por categoria por id
     app.route('/api/livraria/bookcategorie/:id').get((req, res) => {
         //pega todos os livros por categoria
@@ -114,7 +90,35 @@ exports.especialQuery = function especialQuery(app, con) {
             });
         });
         con.end;
-        //--------------------------------------------------
+        //--------------------------------------------------    
+
+    });
+    
+    
+    //buscar dados livro por isbn
+    app.route('/api/livraria/bookdescribe/:isbn').get((req, res) => {
+        var query = "SELECT * FROM bookdescriptions WHERE ISBN ='" + req.params.isbn + "'";
+        var resquery;
+        console.log(query);
+        //-------------------base de dados-----------------
+        con.connect(function (err) {
+            if (err) console.log(err);
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                resquery = JSON.stringify(result);
+                resquery = resquery.substr(1, resquery.length - 3) + ",";
+            });
+            query = "SELECT b.AuthorID,b.nameF,b.nameL FROM bookauthorsbooks AS a LEFT OUTER JOIN bookauthors AS b ON (a.AuthorID=b.AuthorID) WHERE a.ISBN = '" + req.params.isbn + "'";
+            console.log(query);
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                console.log(result);
+                var autores = JSON.stringify(result);
+                var resposta = JSON.parse(resquery + '"authors":' + autores + "}");
+                res.send(resposta);
+            });
+        });
+        con.end;
     });
     
     //buscar livros por author por id

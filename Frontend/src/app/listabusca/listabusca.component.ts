@@ -10,15 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class ListabuscaComponent implements OnInit {
-
-  itensAll = new Array<Livro>();
+  itensBusca = new Array<Livro>();
 
   constructor(private especialQuery: EspecialqueryService, private route: ActivatedRoute) {
   }
+
   ngOnInit() {
-    this.especialQuery.bookCategoria( this.route.snapshot.paramMap.get('id')).subscribe(itens => {
-      this.itensAll = itens;
+    this.especialQuery.allBooks().subscribe(itens => {
+      this.itensBusca = itens;
     });
+//    this.especialQuery.bookCategoria( this.route.snapshot.paramMap.get('id')).subscribe(itens => {
+  //    this.itensBusca = itens;
+    //});
   }
 
   descricaoResumida(descricao: String): String {
