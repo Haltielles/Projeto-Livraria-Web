@@ -14,6 +14,7 @@ import { Retorno } from '../Services/Retorno';
 export class DetalhesComponent implements OnInit {
   isbnRepassado: string;
   itemDetalhe = new Livro();
+  nroCarrinho: string;
   carrinhoItens = new Carrinho();
   retorno: Retorno;
 
@@ -37,17 +38,33 @@ export class DetalhesComponent implements OnInit {
   }
 
   adicionaCarrinho() {
-    this.carrinhoItens.id = 1;
-    this.carrinhoItens.titulo = this.itemDetalhe.title;
-    this.carrinhoItens.ISBN = this.itemDetalhe.ISBN;
-    this.carrinhoItens.quantidade = 1;
-    this.carrinhoItens.valorunidade = this.itemDetalhe.price;
-    this.carrinhoItens.usuario_id = 0;
+    if (localStorage.getItem('myCar') === '') {
+      this.carrinhoService.getMaxCarrinho().subscribe(numero => {
+        localStorage.setItem('myCar', (numero.id + 1).toString());
+        this.carrinhoItens.id = (numero.id + 1);
+        this.carrinhoItens.titulo = this.itemDetalhe.title;
+        this.carrinhoItens.ISBN = this.itemDetalhe.ISBN;
+        this.carrinhoItens.quantidade = 1;
+        this.carrinhoItens.valorunidade = this.itemDetalhe.price;
+        this.carrinhoItens.usuario_id = 0;
+        this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
+          this.retorno = retorno;
+          window.location.reload();
+        });
+      });
+    } else {
+      this.carrinhoItens.id = parseInt(localStorage.getItem('myCar'), 10);
+      this.carrinhoItens.titulo = this.itemDetalhe.title;
+      this.carrinhoItens.ISBN = this.itemDetalhe.ISBN;
+      this.carrinhoItens.quantidade = 1;
+      this.carrinhoItens.valorunidade = this.itemDetalhe.price;
+      this.carrinhoItens.usuario_id = 0;
 
-    this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
-      this.retorno = retorno;
-      window.location.reload();
-    });
+      this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
+        this.retorno = retorno;
+        window.location.reload();
+      });
+    }
+
   }
-
 }

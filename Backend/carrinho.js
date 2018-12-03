@@ -1,5 +1,21 @@
 exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
-    //buscar dados carrinho por id
+  //buscar dados carrinho por id
+    app.route('/api/' + service + '/getmax/').get((req, res) => {
+        var query = "SELECT MAX(id) AS id FROM " + tabela;
+        console.log(query);
+        //-------------------base de dados-----------------
+        con.connect(function (err) {
+            if (err) console.log(err);
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                console.log(result);
+                res.send(result);
+            });
+        });
+        con.end;
+        //--------------------------------------------------
+    });  
+  //buscar dados carrinho por id
     app.route('/api/' + service + '/get/:id').get((req, res) => {
         var query = "SELECT * FROM " + tabela + " WHERE id = " + req.params.id;
         console.log(query);

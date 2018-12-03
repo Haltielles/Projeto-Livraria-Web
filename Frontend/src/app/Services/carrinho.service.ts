@@ -11,6 +11,10 @@ export class CarrinhoService {
 
   constructor(private http: HttpClient) { }
 
+  getMaxCarrinho(): Observable<Carrinho> {
+    return this.http.get<Carrinho>('http://localhost:8000/api/livraria/carrinho/getmax/');
+  }
+
   getCarrinhoId(id: number): Observable<Carrinho[]> {
     return this.http.get<Carrinho[]>('http://localhost:8000/api/livraria/carrinho/get/' + id);
   }
