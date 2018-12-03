@@ -4,12 +4,12 @@ import { LoginComponent } from './login/login.component';
 import { ListaComponent } from './lista/lista.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
-import { isBoolean } from 'util';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
 import { ListabuscaComponent } from './listabusca/listabusca.component';
 import { AtualizacadastroComponent } from './atualizacadastro/atualizacadastro.component';
-import { EquipeComponent } from './equipe/equipe.component';
+import { EquipeComponent } from './equipe/EquipeComponent';
+import { LoginsimplesComponent } from './loginsimples/loginsimples.component';
 
 const routes: Routes = [
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    component: LoginsimplesComponent
+  },
+  {
+    path: 'fecharcompra/login',
     component: LoginComponent
   },
   {

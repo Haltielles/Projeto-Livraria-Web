@@ -92,7 +92,7 @@ export class CarrinhoComponent implements OnInit {
 
   fecharCompra() {
     if (isNull(this.usuarioID)) {
-      this.rota.navigate(['login']);
+      this.rota.navigate(['fecharcompra/login']);
     } else {
       this.rota.navigate(['cadastro']);
     }

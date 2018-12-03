@@ -20,8 +20,6 @@ export class ListabuscaComponent implements OnInit {
   ngOnInit() {
     this.tipo = this.route.snapshot.paramMap.get('tipo');
     this.busca = this.route.snapshot.paramMap.get('id');
-    console.log(this.tipo);
-    console.log(this.busca);
 
     if (this.tipo === 'title') {
       this.especialQuery.bookTitle(this.busca).subscribe(itens => {
@@ -45,7 +43,15 @@ export class ListabuscaComponent implements OnInit {
   }
 
   descricaoResumida(descricao: String): String {
-    return descricao.substr(0, 550);
+    let tamanho: number;
+    let ultimaLetra: string;
+    tamanho = 550;
+    ultimaLetra = descricao.substr(tamanho, 1);
+    for (let a = tamanho; ultimaLetra !== ' '; a++) {
+      ultimaLetra = descricao.substr(a, 1);
+      tamanho = a;
+    }
+    return descricao.substring(0, tamanho);
   }
 }
 
