@@ -17,6 +17,8 @@ import { BookdescriptionService } from './Services/bookdescription.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
 import { ListabuscaComponent } from './listabusca/listabusca.component';
+import { AtualizacadastroComponent } from './atualizacadastro/atualizacadastro.component';
+import { EquipeComponent } from './equipe/equipe.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ListabuscaComponent } from './listabusca/listabusca.component';
     CadastroComponent,
     FecharcompraComponent,
     ListabuscaComponent,
+    AtualizacadastroComponent,
+    EquipeComponent,
   ],
   imports: [
     BrowserModule,

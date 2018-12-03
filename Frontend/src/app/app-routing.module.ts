@@ -8,6 +8,8 @@ import { isBoolean } from 'util';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
 import { ListabuscaComponent } from './listabusca/listabusca.component';
+import { AtualizacadastroComponent } from './atualizacadastro/atualizacadastro.component';
+import { EquipeComponent } from './equipe/equipe.component';
 
 const routes: Routes = [
   {
@@ -35,8 +37,16 @@ const routes: Routes = [
     component: CadastroComponent
   },
   {
+    path: 'equipe',
+    component: EquipeComponent
+  },
+  {
     path: 'cadastro',
     component: CadastroComponent
+  },
+  {
+    path: 'atualizacadastro',
+    component: AtualizacadastroComponent
   },
   {
     path: 'fecharcompra',

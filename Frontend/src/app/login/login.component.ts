@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         window.location.reload();
       }
       localStorage.setItem('email', email);
-      this.rota.navigate(['cadastro']);
+      this.rota.navigate(['atualizacadastro']);
     });
 }
 }
