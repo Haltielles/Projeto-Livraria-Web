@@ -51,12 +51,12 @@ exports.servicoCompra = function servicoCompra(service, app, con, tabela) {
     //inserir nova compra
     app.route('/api/' + service + '/insert/').post((req, res) => {
         var myobj = req.body;
-        var query = "INSERT INTO " + tabela + " (id_compra,id_usuario,id_carrinho,frete,valor total)" +
-            "VALUES ('" + myobj.id_compra + "','" + myobj.id_usuario + "','" + myobj.id_carrinho + "','" + myobj.frete + "','" + myobj.valortotal + "')";
+        var query = "INSERT INTO " + tabela + " (id_usuario,id_carrinho,frete,valortotal)" +
+            "VALUES ('" + myobj.id_usuario + "','" + myobj.id_carrinho + "','" + myobj.frete + "','" + myobj.valortotal + "')";
         console.log(query);
         //--------------------base de dados--------------
         con.connect(function (err) {
-            if (err) throw err;
+            if (err) console.log(err);
             console.log("Connected!");
             con.query(query, function (err, result) {
                 if (err) throw err;

@@ -74,21 +74,25 @@ export class CarrinhoComponent implements OnInit {
     for (let a = 0; a < this.itensCar.length; a++) {
       subtotal = subtotal + (this.itensCar[a].quantidade * this.itensCar[a].valorunidade);
     }
-    return subtotal;
+    return (Number.parseFloat((subtotal.toFixed(2))));
   }
 
   freteCalculado(): number {
     if (this.itensCar.length === 1) {
+      localStorage.setItem('frete', '10');
       return 10;
     } else if (this.itensCar.length > 1) {
+      localStorage.setItem('frete', (10 + ((this.itensCar.length - 1) * 5)).toString() );
       return (10 + ((this.itensCar.length - 1) * 5));
     } else {
+      localStorage.setItem('frete', '0');
       return 0;
     }
   }
 
   totalCalculado(): number {
-    return (this.subtotal + this.frete);
+    localStorage.setItem('totalCompra', (this.subtotal + this.frete).toString() );
+    return (Number.parseFloat((this.subtotal + this.frete).toFixed(2)));
   }
 
   fecharCompra() {
@@ -98,7 +102,7 @@ export class CarrinhoComponent implements OnInit {
       if (isNull(this.usuarioID)) {
         this.rota.navigate(['fecharcompra/login']);
       } else {
-        this.rota.navigate(['cadastro']);
+        this.rota.navigate(['atualizacadastro']);
       }
     }
 

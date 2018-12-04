@@ -19,7 +19,7 @@ import { FecharcompraComponent } from './fecharcompra/fecharcompra.component';
 import { ListabuscaComponent } from './listabusca/listabusca.component';
 import { AtualizacadastroComponent } from './atualizacadastro/atualizacadastro.component';
 import { EquipeComponent } from './equipe/equipe.component';
-import { LoginsimplesComponent } from './loginsimples/loginsimples.component';
+import { LoginfecharComponent } from './loginfechar/loginfechar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { LoginsimplesComponent } from './loginsimples/loginsimples.component';
     ListabuscaComponent,
     AtualizacadastroComponent,
     EquipeComponent,
-    LoginsimplesComponent,
+    LoginfecharComponent,
   ],
   imports: [
     BrowserModule,
