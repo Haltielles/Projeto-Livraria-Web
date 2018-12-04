@@ -20,6 +20,7 @@ export class CarrinhoComponent implements OnInit {
   usuarioID: string;
   usuarioNome: string;
   retorno: Retorno;
+  nroCarrinho: number;
 
   constructor(private carrinhoService: CarrinhoService, private rota: Router) {
   }
@@ -27,8 +28,8 @@ export class CarrinhoComponent implements OnInit {
   ngOnInit() {
     this.usuarioID = localStorage.getItem('userID');
     this.usuarioNome = localStorage.getItem('userName');
-    // observar este ponto
-    this.carrinhoService.getCarrinhoId(1).subscribe(itens => {
+    this.nroCarrinho = Number.parseInt(localStorage.getItem('myCar'), 10);
+    this.carrinhoService.getCarrinhoId(this.nroCarrinho).subscribe(itens => {
       this.itensCar = itens;
       this.subtotal = this.subtotalCalculado();
       this.frete = this.freteCalculado();
@@ -45,7 +46,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   alteraQtdeMais(item: Carrinho) {
-    item.quantidade ++;
+    item.quantidade++;
     this.carrinhoService.updateCarrinho(item).subscribe(retorno => {
       this.retorno = retorno;
       window.location.reload();
@@ -53,10 +54,10 @@ export class CarrinhoComponent implements OnInit {
   }
 
   alteraQtdeMenos(item: Carrinho) {
-    if ( item.quantidade === 1) {
+    if (item.quantidade === 1) {
       this.retiraItem(item.id, item.ISBN);
     } else {
-      item.quantidade --;
+      item.quantidade--;
       this.carrinhoService.updateCarrinho(item).subscribe(retorno => {
         this.retorno = retorno;
         window.location.reload();
@@ -91,10 +92,15 @@ export class CarrinhoComponent implements OnInit {
   }
 
   fecharCompra() {
-    if (isNull(this.usuarioID)) {
-      this.rota.navigate(['fecharcompra/login']);
+    if (localStorage.getItem('myCar') === null || this.totalCalculado() === 0) {
+      alert('carrinho está vazio');
     } else {
-      this.rota.navigate(['cadastro']);
+      if (isNull(this.usuarioID)) {
+        this.rota.navigate(['fecharcompra/login']);
+      } else {
+        this.rota.navigate(['cadastro']);
+      }
     }
+
   }
 }

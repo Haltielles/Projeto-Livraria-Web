@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EspecialqueryService } from '../Services/especialquery.service';
 import { Livro } from '../Services/especialquery';
@@ -18,7 +18,7 @@ export class DetalhesComponent implements OnInit {
   carrinhoItens = new Carrinho();
   retorno: Retorno;
 
-  constructor(private route: ActivatedRoute, private especialQuery: EspecialqueryService, private carrinhoService: CarrinhoService) {
+  constructor(private route: ActivatedRoute, private rota: Router, private especialQuery: EspecialqueryService, private carrinhoService: CarrinhoService) {
   }
 
   ngOnInit() {
@@ -38,10 +38,16 @@ export class DetalhesComponent implements OnInit {
   }
 
   adicionaCarrinho() {
-    if (localStorage.getItem('myCar') === '') {
+    if (localStorage.getItem('myCar') === null) {
       this.carrinhoService.getMaxCarrinho().subscribe(numero => {
-        localStorage.setItem('myCar', (numero.id + 1).toString());
-        this.carrinhoItens.id = (numero.id + 1);
+        if (numero.id === null) {
+          numero.id = 1;
+        } else {
+          numero.id = numero.id + 1;
+        }
+        console.log(numero);
+        localStorage.setItem('myCar', (numero.id).toString());
+        this.carrinhoItens.id = (numero.id);
         this.carrinhoItens.titulo = this.itemDetalhe.title;
         this.carrinhoItens.ISBN = this.itemDetalhe.ISBN;
         this.carrinhoItens.quantidade = 1;
@@ -49,7 +55,8 @@ export class DetalhesComponent implements OnInit {
         this.carrinhoItens.usuario_id = 0;
         this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
           this.retorno = retorno;
-          window.location.reload();
+          this.rota.navigate(['carrinho']);
+          //          window.location.reload();
         });
       });
     } else {
@@ -62,7 +69,8 @@ export class DetalhesComponent implements OnInit {
 
       this.carrinhoService.insertCarrinho(this.carrinhoItens).subscribe(retorno => {
         this.retorno = retorno;
-        window.location.reload();
+        this.rota.navigate(['carrinho']);
+        //window.location.reload();
       });
     }
 

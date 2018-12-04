@@ -10,6 +10,7 @@ import { EmailsenderService } from '../Services/emailsender.service';
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })
+
 export class CadastroComponent implements OnInit {
   emailRepassado: string;
   usuarioID: string;
@@ -17,24 +18,13 @@ export class CadastroComponent implements OnInit {
   usuarioEmail: string;
   usuario = new Usuario();
   retorno: Retorno;
-  btoCadastrar: string;
 
   constructor(private route: ActivatedRoute, private servUser: UsuarioService, private rota: Router, private emailSend: EmailsenderService) {
   }
 
   ngOnInit() {
-    this.usuarioID = localStorage.getItem('userID');
-    this.usuarioNome = localStorage.getItem('userName');
     this.usuarioEmail = localStorage.getItem('email');
-    if (this.usuarioID !== null) {
-      this.servUser.getUsuario(this.usuarioEmail).subscribe(itens => {
-        this.usuario = itens;
-        document.getElementById('historico').setAttribute('disable', 'false');
-        this.btoCadastrar = 'Atualizar Cadastro e Finalizar Compra';
-      });
-    } else {
-      this.btoCadastrar = 'Cadastrar e Finalizar Compra';
-    }
+    document.getElementById('fname').focus();
   }
 
   confirmarCadastro(first_name: string, last_name: string, email: string, street: string, city: string, state: string, zip: string) {
@@ -45,22 +35,16 @@ export class CadastroComponent implements OnInit {
     this.usuario.city = city;
     this.usuario.state = state;
     this.usuario.zip = zip;
-    if (this.usuarioID !== null) {
-      this.servUser.updateUsuario(this.usuario).subscribe(retorno => {
-        this.retorno = retorno;
-        this.emailSend.sendEmail(this.usuario.email, (this.usuario.fname + ' ' + this.usuario.lname), 1, Number.parseFloat(localStorage.getItem('totalCompra'))).subscribe(retorno => {
-          this.retorno = retorno;
-          this.rota.navigate(['fecharcompra']);
-        });
+
+    this.servUser.insertUsuario(this.usuario).subscribe(retorno => {
+      this.retorno = retorno;
+      this.servUser.getUsuario(email).subscribe(retorno2 => {
+        this.usuario = retorno2;
+        localStorage.setItem('userID', this.usuario.custID.toString());
+        localStorage.setItem('userName', (this.usuario.fname + ' ' + this.usuario.lname));
+        window.location.reload();
+        this.rota.navigate(['']);
       });
-    } else {
-      this.servUser.insertUsuario(this.usuario).subscribe(retorno => {
-        this.retorno = retorno;
-        this.emailSend.sendEmail(this.usuario.email, (this.usuario.fname + ' ' + this.usuario.lname), 1, Number.parseFloat(localStorage.getItem('totalCompra'))).subscribe(retorno => {
-          this.retorno = retorno;
-          this.rota.navigate(['fecharcompra']);
-        });
-      });
-    }
+    });
   }
 }

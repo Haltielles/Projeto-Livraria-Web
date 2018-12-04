@@ -17,7 +17,7 @@ exports.servicoBookCategory = function servicoBookCategory(service, app, con, ta
   });
   app.route('/api/' + service + '/getall').get((req, res) => {
     
-    var query = "SELECT a.CategoryID, a.CategoryName FROM bookcategories AS a INNER JOIN bookcategoriesbooks AS b ON ( a.CategoryID = b.CategoryID ) GROUP BY a.CategoryID";
+    var query = "SELECT a.CategoryID, a.CategoryName FROM bookcategories AS a INNER JOIN bookcategoriesbooks AS b ON ( a.CategoryID = b.CategoryID ) GROUP BY a.CategoryID ORDER BY a.CategoryName ASC";
     console.log(query);
     //-------------------base de dados-----------------
     con.connect(function (err) {

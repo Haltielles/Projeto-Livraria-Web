@@ -1,7 +1,7 @@
 <div class="card-panel white col s6 m6 l6">
   <div class="row">
     <div class="input-field col s6 m6 l6">
-      <input #first_name type="text" class="validate" value="{{usuario.fname}}">
+      <input #first_name id="fname" type="text" class="validate" value="{{usuario.fname}}">
       <label for="first_name">First Name</label>
     </div>
 
@@ -13,7 +13,7 @@
 
   <div class="row">
     <div class="input-field col s12 m12 l12">
-      <input #email type="email" class="validate" value="{{usuarioEmail}}">
+      <input #email id="email" type="email" class="validate" value="{{usuarioEmail}}" disabled>
       <label for="email">Email</label>
     </div>
   </div>
@@ -44,13 +44,8 @@
 
   <div class="row">
     <button class="btn waves-effect waves-light" id='cadastrar' (click)="confirmarCadastro( first_name.value, last_name.value, email.value, street.value, city.value, state.value, zip.value )"
-      type="button">{{btoCadastrar}}
+      type="button">Cadastrar
       <i class="material-icons right">send</i>
     </button>
-    <button class="btn waves-effect waves-light" id='historico' disabled='true' (click)="confirmarCadastro( first_name.value, last_name.value, email.value, street.value, city.value, state.value, zip.value )"
-      type="button">Ver Historico
-      <i class="material-icons right">receipt</i>
-    </button>
-
   </div>
 </div>

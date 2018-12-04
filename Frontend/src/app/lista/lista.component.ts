@@ -41,6 +41,26 @@ export class ListaComponent implements OnInit {
 
   descricaoResumida(descricao: String): String {
     let tamanho: number;
+    let maximo: number;
+    let ultimaLetra: string;
+    tamanho = 550;
+    ultimaLetra = descricao.substr(tamanho, 1);
+    maximo = descricao.length;
+    if (maximo > tamanho) {
+      for (let a = tamanho; ultimaLetra !== ' '; a++) {
+        ultimaLetra = descricao.substr(a, 1);
+        tamanho = a;
+      }
+    }
+    return descricao.substring(0, tamanho);
+  }
+
+  /*descricaoResumida(descricao: String): String {
+    return descricao.substring(0, 550);
+  }
+
+  descricaoResumida(descricao: String): String {
+    let tamanho: number;
     let ultimaLetra: string;
     tamanho = 550;
     ultimaLetra = descricao.substr(tamanho, 1);
@@ -49,6 +69,5 @@ export class ListaComponent implements OnInit {
       tamanho = a;
     }
     return descricao.substring(0, tamanho);
-  }
+  }*/
 }
-

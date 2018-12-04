@@ -7,9 +7,11 @@ exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
         con.connect(function (err) {
             if (err) console.log(err);
             con.query(query, function (err, result, fields) {
-                if (err) throw err;
-                console.log(result);
-                res.send(result);
+                if (err) console.log(err);
+		var resposta = JSON.stringify(result);
+		resposta = resposta.substring(1,resposta.length-1);
+                console.log(resposta);
+                res.send(JSON.parse(resposta));
             });
         });
         con.end;
@@ -23,7 +25,7 @@ exports.servicoCarrinho = function servicoCarrinho(service, app, con, tabela) {
         con.connect(function (err) {
             if (err) console.log(err);
             con.query(query, function (err, result, fields) {
-                if (err) throw err;
+                if (err) console.log(err);
                 console.log(result);
                 res.send(result);
             });
